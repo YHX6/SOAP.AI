@@ -21,7 +21,7 @@ def documentation_tool_task(req):
         
     # for each task, write logic here
     if task == "ASK_STORY":
-        try:
+        try:                                                        
             resp = OpenAIAPI.send_prompt(prompt = prompt+ " "+  PromptTemplate.ask_story(username))
             res = parse_to_json(resp)  # parse response into　 json
         except:
