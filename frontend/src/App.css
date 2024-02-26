@@ -1,0 +1,62 @@
+:root{
+  /* colors */
+  --color-bg: #fffad0;
+  --color-bar: #fff9a4;
+  --color-bar-dark: #fffc5d;
+  --color-text: #000;
+  --color-dec: #10cfff;
+  --color-dec2: #E1EDE9;
+
+  /* fonts */
+  --font-size-h1: 3rem;
+  --font-size-h2: 2.5rem;
+  --font-size-h3: 2rem;
+  --font-size-c1: 1.75rem;
+  --font-size-c2: 1.5rem;
+  --font-size-c3: 1.25rem;
+  --font-size-c4: 1rem;
+  --font-size-note: 0.8rem;
+
+  --font-weight-h:800;
+  --font-weight-m:600;
+  --font-weight-s:500;
+
+
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+
+/* position */
+body {
+  background-color: var(--color-bg);
+  font-size: var(--font-size-c2);
+  color: var(--color-text);
+  font-weight: var(--font-weight-m);
+  line-height: 2.5rem;
+}
+
+button{
+  cursor: pointer;
+}
+
+
+/* to make img in center no matter the box size */
+.img-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.box-img{
+  min-width: 100%;
+  min-height: 100%;
+  display: block; 
+  object-fit: cover;
+}

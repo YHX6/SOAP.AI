@@ -1,0 +1,36 @@
+.font-h1 {
+    font-size: 3rem !important;
+    font-weight: 800 !important;
+}
+.font-h2 {
+    font-size: 2.5rem !important;
+    font-weight: 600 !important;
+}
+.font-h3 {
+    font-size: 2rem !important;
+    font-weight: 600 !important;
+}
+
+.font-c1 {
+    font-size: 1.75rem !important;
+    font-weight: 500 !important;
+}
+.font-c2 {
+    font-size: 1.5rem !important;
+    font-weight: 500 !important;
+}
+.font-c3 {
+    font-size: 1.25rem !important;
+    font-weight: 500 !important;
+}
+.font-c4 {
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+}
+
+.font-notes1 {
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+}
+
+    
