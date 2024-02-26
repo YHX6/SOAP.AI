@@ -4,17 +4,42 @@
 
     display: flex;
     flex-direction: row;
+    padding: 50px 30px;
+    gap: 30px;
 }
 .diagnois-page-left{
     width: 50%;
-    height: calc(100% - 50px);
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
+/************************* key words  ********************/
+.diagnois-page-left-top{
+    background-color: red;
+    height: 30%;
+}
+
+
+
+
+/************************* key transcripts  ********************/
+
+.diagnois-page-left-bottom{
+    background-color: red;
+    height: 70%;
+}
+
+
+
+
+/************************* words editor  ********************/
 .diagnois-page-right{
     width: 50%;
     height: 100%;
 }
-
 
 .audio-btns{
     height: 50px;

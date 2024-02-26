@@ -30,7 +30,7 @@ npm start
 
 ### Backend
 
-Create a `.env` file in your `/backend` folder and add these lines into it  (Replace information ...)
+Create a `.env` file in your `/backend-django` folder and add these lines into it  (Replace information ...)
 
 ```
 OPENAI_API_KEY="..."
@@ -41,7 +41,7 @@ OPENAI_API_ENDPOINT="."
 Open a new terminal, then run following command in terminal
 
 ```shell
-cd path_to_your_project/backend
+cd path_to_your_project/backend-django
 conda create --name yourenvname python=3.9
 conda activate yourenvname
 pip install -r requirements.txt
@@ -53,7 +53,7 @@ python manage.py runserver
 Start backend server
 
 ```shell
-cd path_to_your_project/backend
+cd path_to_your_project/backend-django
 conda activate yourenvname
 python manage.py runserver
 ```

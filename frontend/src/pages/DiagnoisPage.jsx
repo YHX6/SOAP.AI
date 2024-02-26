@@ -40,15 +40,22 @@ function DiagnosisPage() {
         <div className="main">
             <div className="diagnois-page">
                 <div className="diagnois-page-left">
-                    <MyEditor  showTools={true}  ref={editor_1_Ref}></MyEditor>
+                    {/*  key words  component*/}
+                    <di className="diagnois-page-left-top">
+                        KEY WORDS
+                    </di>
 
-                    <div className="audio-btns">
-                        <SpeechButton onTranscript={handleTranscript}></SpeechButton>
-                        {/* <SpeechButton></SpeechButton> */}
-                        {/* <span>{`Transcript: ${transcript}`}</span> */}
 
-                        <button onClick={sampleAPIRequest}> Send api</button>
+                    {/* transcription conponent */}
+                    <div className="diagnois-page-left-bottom">
+                        TRANSCRIPT
+
+
+                        <div className="audio-btns">
+                            <SpeechButton onTranscript={handleTranscript}></SpeechButton>
+                        </div>
                     </div>
+
                 </div>
 
                 <div className="diagnois-page-right">
