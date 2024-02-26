@@ -35,10 +35,10 @@
 /* position */
 body {
   background-color: var(--color-bg);
-  font-size: var(--font-size-c2);
-  color: var(--color-text);
-  font-weight: var(--font-weight-m);
-  line-height: 2.5rem;
+  /* font-size: var(--font-size-c2); */
+  /* color: var(--color-text); */
+  /* font-weight: var(--font-weight-m); */
+  /* line-height: 2.5rem; */
 }
 
 button{
