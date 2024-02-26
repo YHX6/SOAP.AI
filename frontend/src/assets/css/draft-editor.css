@@ -206,3 +206,13 @@
   }
   
 
+/********************** color picker  ***********************/
+.color-picker-button{
+  position: relative;
+}
+
+.color-picker-container{
+  position: absolute;
+  top: 30px;
+  left: -5px;
+}

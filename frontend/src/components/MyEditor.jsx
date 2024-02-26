@@ -1,6 +1,6 @@
 import React, {useState, useCallback, useImperativeHandle, forwardRef, useEffect} from 'react';
 import { Editor, EditorState, RichUtils, convertToRaw, convertFromRaw, ContentState, Modifier  } from 'draft-js';
-
+import { GithubPicker, SketchPicker } from 'react-color';
 
 import iconAlignCenter from "../assets/icons/align_center.svg";
 import iconAlignLeft from "../assets/icons/align_left.svg";
@@ -10,6 +10,7 @@ import iconItalics from "../assets/icons/italics.svg";
 import iconUnderScore from "../assets/icons/underscore.svg";
 import iconOderedList from "../assets/icons/ordered_list.svg";
 import iconUnoderedList from "../assets/icons/unordered_list.svg";
+import iconFontColor from "../assets/icons/font-colors.svg";
 
 // you might need to adjust the path to css file
 import "../assets/css/draft-editor.css";
@@ -19,6 +20,9 @@ import "../assets/css/draft-editor.css";
 const MyEditor = forwardRef((props, ref)  =>{
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [cursorStyle, setCursorStyle] = useState([]);
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  const [currentColor, setCurrentColor] = useState('black');
+  const [lastColor, setLastColor] = useState("N/A");
   // render init data
   useEffect(() => {
     if(props.rawContent && Object.keys(props.rawContent).length !== 0){
@@ -84,6 +88,7 @@ const MyEditor = forwardRef((props, ref)  =>{
   // get the style of where the cursor is to as to render the buttons:on 
   const onChange = (newEditorState) => {
     const stylesAtCursor = getStylesAtCursor(newEditorState);
+    // console.log(stylesAtCursor)
     setCursorStyle(stylesAtCursor);
     setEditorState(newEditorState);
   };
@@ -93,6 +98,87 @@ const MyEditor = forwardRef((props, ref)  =>{
     onChange(RichUtils.toggleInlineStyle(editorState, inlineStyle));
   }, [editorState, onChange]);
 
+
+  //  color
+    const styleMap = {
+    "color_b80000": {
+      color:"#b80000"
+    },
+    "color_db3e00": {
+      color:"#db3e00"
+    },
+    "color_fccb00": {
+      color:"#fccb00"
+    },
+    "color_008b02": {
+      color:"#008b02"
+    },
+    "color_006b76": {
+      color:"#006b76"
+    },
+    "color_1273de": {
+      color:"#1273de"
+    },
+    "color_004dcf": {
+      color:"#004dcf"
+    },
+    "color_5300eb": {
+      color:"#5300eb"
+    },
+    "color_eb9694": {
+      color:"#eb9694"
+    },
+    "color_fad0c3": {
+      color:"#fad0c3"
+    },
+    "color_fef3bd": {
+      color:"#fef3bd"
+    },
+    "color_c1e1c5": {
+      color:"#c1e1c5"
+    },
+    "color_bedadc": {
+      color:"#bedadc"
+    },
+    "color_c4def6": {
+      color:"#c4def6"
+    },
+    "color_bed3f3": {
+      color:"#bed3f3"
+    },
+    "color_d4c4fb": {
+      color:"#d4c4fb"
+    },
+    
+  };
+  const handleColorChange = (color) => {
+    // const colorStyle = `color_${color.hex.replace('#', '')}`;
+    const colorStyle = `color_${color.hex.replace('#', '')}`;
+    // const colorStyle = "color_cf1917"
+    // styleMap[colorStyle] = { color: color.hex };
+  
+    //   const newEditorState = RichUtils.toggleInlineStyle(
+    //     editorState,
+    //     colorStyle
+    //   );
+    
+    // console.log(styleMap)
+    const newEditorState = RichUtils.toggleInlineStyle(
+      editorState,
+      colorStyle
+    );
+    setEditorState(newEditorState);
+
+    // console.log(colorStyle)
+    // console.log(typeof(colorStyle))
+    // console.log(getStylesAtCursor(newEditorState))
+    // console.log(typeof(getStylesAtCursor(newEditorState)))
+    // console.log(colorStyle in getStylesAtCursor(newEditorState))
+    // console.log(getStylesAtCursor(newEditorState).includes(colorStyle))
+      // onChange(RichUtils.toggleInlineStyle(editorState, currentColor));
+    }
+
+
   // bold/underscore
   const toggleBlockType = useCallback((blockType) => {
     onChange(RichUtils.toggleBlockType(editorState, blockType));
@@ -100,18 +186,18 @@ const MyEditor = forwardRef((props, ref)  =>{
 
 
     //  for text alignment
-    function toggleTextAlignment(editorState, alignment) {
-      const selection = editorState.getSelection();
-      const contentState = editorState.getCurrentContent();
-    
-      const newContentState = Modifier.mergeBlockData(
-        contentState,
-        selection,
-        { textAlign: alignment }
-      );
-    
-      return EditorState.push(editorState, newContentState, 'change-block-data');
-    }
+  function toggleTextAlignment(editorState, alignment) {
+    const selection = editorState.getSelection();
+    const contentState = editorState.getCurrentContent();
+  
+    const newContentState = Modifier.mergeBlockData(
+      contentState,
+      selection,
+      { textAlign: alignment }
+    );
+  
+    return EditorState.push(editorState, newContentState, 'change-block-data');
+  }
 
     const applyAlignment = (alignment) => {
       const newState = toggleTextAlignment(editorState, alignment);
@@ -133,6 +219,7 @@ const MyEditor = forwardRef((props, ref)  =>{
       if (blockData.get('fontFamily')) {
         className +=  " " + blockData.get('fontFamily');
       }
+
       return className;
     }
 
@@ -196,6 +283,10 @@ const MyEditor = forwardRef((props, ref)  =>{
   }, [editorState]);
 
 
+    
+  
+  
+
 
   ///////////////////////////////////////////////////////////////////////////////////////////
   // pass function for parent compenet
@@ -243,6 +334,12 @@ const MyEditor = forwardRef((props, ref)  =>{
             <button className={`toolbar-btn-type1 is-cursor-style-${cursorStyle.includes("BOLD")}`} onClick={() => toggleInlineStyle('BOLD')}><img src={iconBold} alt="icon bold"></img></button>
             <button className={`toolbar-btn-type1 is-cursor-style-${cursorStyle.includes("ITALIC")}`} onClick={() => toggleInlineStyle('ITALIC')}><img src={iconItalics} alt="icon italics"></img></button>
             <button className={`toolbar-btn-type1 is-cursor-style-${cursorStyle.includes("UNDERLINE")}`} onClick={() => toggleInlineStyle('UNDERLINE')}><img src={iconUnderScore} alt="icon underscore"></img></button>
+            <button className="toolbar-btn-type1 color-picker-button" onClick={() => setShowColorPicker(!showColorPicker)}>
+              <img src={iconFontColor} alt="icon underscore"></img>
+              {showColorPicker ? <div className='color-picker-container'><GithubPicker color={currentColor} onChangeComplete={handleColorChange}></GithubPicker></div>: ""}
+              {/* {showColorPicker ? <SketchPicker color={currentColor} onChangeComplete={() => toggleInlineStyle("RED")}></SketchPicker>: ""} */}
+            </button>
+
             <button className={`toolbar-btn-type1 is-cursor-style-${cursorStyle.includes("unordered-list-item")}`} onClick={() => toggleBlockType('unordered-list-item')}><img src={iconUnoderedList} alt="icon unordered list"></img></button>
             <button className={`toolbar-btn-type1 is-cursor-style-${cursorStyle.includes("ordered-list-item")}`} onClick={() => toggleBlockType('ordered-list-item')}><img src={iconOderedList} alt="icon ordered list"></img></button>
           
@@ -258,6 +355,7 @@ const MyEditor = forwardRef((props, ref)  =>{
             editorState={editorState} 
             onChange={onChange} 
             blockStyleFn={blockStyleFn}
+            customStyleMap={styleMap}
           />
         </div>
       </div>
