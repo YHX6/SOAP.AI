@@ -14,7 +14,7 @@ from ..utils.utils import *
 
 def documentation_tool_task(req):
     #  get parameters from request
-    task, prompt, scriptplay_id, order = req["script_name"], req["task"], req["prompt"], req["scriptplay_id"], req["order"]
+    task, prompt =  req["task"], req["prompt"]
     print("task",task)
 
 
@@ -29,4 +29,7 @@ def documentation_tool_task(req):
             res = parse_to_json(resp)
 
         return res
-  
+    
+    elif task == "TEST":
+        res = req["prompt"] + req["content"]
+        return res

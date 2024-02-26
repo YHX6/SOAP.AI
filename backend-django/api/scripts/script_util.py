@@ -1,5 +1,9 @@
 class PromptTemplate:
 
+    @staticmethod
+    def wrap_prompt_settings(prompt):
+        return "asd"
+
     # Below are some of the prompt example of our previous project
 
     # @staticmethod
