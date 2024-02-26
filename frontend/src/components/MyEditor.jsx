@@ -214,7 +214,6 @@ const MyEditor = forwardRef((props, ref)  =>{
       setContentFromText(content);
     },
     setContentFromText,
-
   }))
 
 
