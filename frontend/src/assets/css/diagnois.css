@@ -7,10 +7,15 @@
 }
 .diagnois-page-left{
     width: 50%;
-    height: 100%;
+    height: calc(100% - 50px);
 }
 
 .diagnois-page-right{
     width: 50%;
     height: 100%;
+}
+
+
+.audio-btns{
+    height: 50px;
 }
