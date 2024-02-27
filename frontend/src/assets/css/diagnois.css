@@ -28,8 +28,41 @@
 /************************* key transcripts  ********************/
 
 .diagnois-page-left-bottom{
-    background-color: red;
+    background-color: white;
     height: 70%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.diagnois-page-conversations{
+    height: 75%;
+    width: 90%;
+    overflow-Y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 8px;
+    /* marginBottom: '20px'; */
+}
+
+.diagnois-page-title{
+    margin: 10px;
+    text-align: center
+}
+
+.audio-btns{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.audio-btn-box{
+    display: flex;
+    flex-direction: column;
+}
+.voice-btn {
+    background-color: white;
 }
 
 
