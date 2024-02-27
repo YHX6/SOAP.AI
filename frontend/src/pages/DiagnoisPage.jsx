@@ -5,7 +5,34 @@ import { useRef, useState } from "react";
 import axios from "axios";
 import { documentToolRouter } from "../config/routeConfig";
 
+
+
+const defaultKeywordList = [
+    {word:"HADD", tag:"Ideation", from:"John"},
+    {word:"Asd", tag:"testtag", from:"Amy"},
+]
+
+
 function DiagnosisPage() {
+    // keyword part
+    const [keywords, setKeywords] = useState(defaultKeywordList);
+    const [inputWord, setInputWord] = useState("");
+    const [inputTag, setInputTag] = useState("");
+    const [inputFrom, setInputFrom] = useState("");
+    const removeKeyword = (kw) => {
+        setKeywords(keywords.filter(item => item.word !== kw));
+    }
+    const addkeyword = () => {
+        let w = inputWord;
+        let t = inputTag;
+        let f = inputFrom;
+        setKeywords([...keywords, {word:w, tag:t, from:f}])
+        setInputWord("");
+        setInputTag("");
+        setInputFrom("");
+    }
+
+
     const editor_1_Ref = useRef();
     const editor_2_Ref = useRef();
 
@@ -16,7 +43,6 @@ function DiagnosisPage() {
             console.log(currentContent + text)
             editor_1_Ref.current.setTextContent(currentContent + text);
         }
-
     };
 
 
@@ -33,8 +59,6 @@ function DiagnosisPage() {
         .catch((e) => alert(e));
     }
 
-    
-
 
     return ( 
         <div className="main">
@@ -42,7 +66,38 @@ function DiagnosisPage() {
                 <div className="diagnois-page-left">
                     {/*  key words  component*/}
                     <di className="diagnois-page-left-top">
-                        KEY WORDS
+                        <div className="keyword-container">
+                            <div className="keyword-table-header">
+                                <div className="keyword-table-row">
+                                    <span>Key Words</span>
+                                    <span>Tag</span>
+                                    <span>Therapist</span>
+                                    <span></span>
+                                </div>
+                            </div>
+
+                            <div className="keyword-table-body scrobar-1">
+                                {keywords.map((item, i) => {
+                                    return (
+                                        <div className="keyword-table-row" key={i}>
+                                            <span>{item.word}</span>
+                                            <span>{item.tag}</span>
+                                            <span>{item.from}</span>
+                                            <span className="table-operation" onClick={() => removeKeyword(item.word)}>-</span>
+                                        </div>
+
+                                    )
+                                })}
+                            </div>
+                            
+                            <div className="keyword-table-input">
+                                <input type="text" value={inputWord} onChange={(e) => setInputWord(e.target.value)}></input>
+                                <input type="text" value={inputTag} onChange={(e) => setInputTag(e.target.value)}></input>
+                                <input type="text" value={inputFrom} onChange={(e) => setInputFrom(e.target.value)}></input>
+                                <button className="table-operation" onClick={addkeyword}>+</button>
+                            </div>
+
+                        </div>
                     </di>
 
 
