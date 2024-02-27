@@ -124,14 +124,11 @@ function DiagnosisPage() {
             <div className="diagnois-page">
                 <div className="diagnois-page-left">
                     {/*  key words  component*/}
-                    <div className="diagnois-page-left-top">
-                        KEY WORDS
-                    </div>
                     <di className="diagnois-page-left-top">
                         <div className="keyword-container">
                             <div className="keyword-table-header">
                                 <div className="keyword-table-row">
-                                    <span>Key Words</span>
+                                    <span>Notes</span>
                                     <span>Tag</span>
                                     <span>Time</span>
                                     <span></span>
