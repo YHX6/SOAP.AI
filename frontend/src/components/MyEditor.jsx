@@ -455,7 +455,7 @@ const MyEditor = forwardRef((props, ref)  =>{
 //   return newEditorState; // Return the new EditorState
 // };
 
-const insertLineText = (editorState, text, blockType, inlineStyle) => {
+const insertLineText = (editorState, text, blockType, inlineStyle, fontSize, fontFamily) => {
   const currentContent = editorState.getCurrentContent();
   const currentSelection = editorState.getSelection();
 
@@ -466,6 +466,7 @@ const insertLineText = (editorState, text, blockType, inlineStyle) => {
   // Insert text
   newContentState = Modifier.insertText(newContentState, targetSelection, text);
 
+
   // Apply block type
   let blockKey = targetSelection.getStartKey();
   let newBlockMap = newContentState.getBlockMap().map(block => {
@@ -474,6 +475,35 @@ const insertLineText = (editorState, text, blockType, inlineStyle) => {
     }
     return block;
   });
+
+
+  // add classname for size
+  if(fontSize){
+      newBlockMap = newBlockMap.map((block) => {
+      if (currentSelection.hasEdgeWithin(block.getKey(), 0, block.getLength())) {
+        // Use metadata to store the class information
+        let newBlock = block.set('data', block.getData().merge({["fontSize"]: fontSize}));
+        return newBlock;
+      }
+      return block;
+    });
+  }
+
+  if(fontFamily){
+    newBlockMap = newBlockMap.map((block) => {
+      if (currentSelection.hasEdgeWithin(block.getKey(), 0, block.getLength())) {
+        // Use metadata to store the class information
+        let newBlock = block.set('data', block.getData().merge({["fontFamily"]: fontFamily}));
+        return newBlock;
+      }
+      return block;
+    });
+  }
+
+
+
+
+
   newContentState = newContentState.set('blockMap', newBlockMap);
 
   // Apply inline style
@@ -504,36 +534,32 @@ const insertLineText = (editorState, text, blockType, inlineStyle) => {
 
 const insertMultipleTexts = (data, title) => {
   let newState = editorState;
-  // newState = insertLineText(newState, "First text", "unstyled", "BOLD");
-  // newState = insertLineText(newState, "Second text", "ordered-list-item", "BOLD");
-  // newState = insertLineText(newState, "Third text", "unordered-list-item", "ITALIC");
-  newState = insertLineText(newState, title, "unstyled", "BOLD");
-  newState = insertLineText(newState, "", "unstyled", "")  // insert empty line
+  newState = insertLineText(newState, title, "unstyled", "BOLD", "fontSizeH2", "");
+  newState = insertLineText(newState, "", "unstyled", "", "fontSizeH2", "")  // insert empty line
 
-  console.log(data);
-  console.log(title)
-  console.log(data[title][0]);
-  console.log(typeof data[title])
+  // console.log(data);
+  // console.log(title)
+  // console.log(data[title][0]);
+  // console.log(typeof data[title])
   if(data[title] instanceof Array){
     // if array of object
     for(let i=0; i<data[title].length; i++){
       for(let key in data[title][i]){
-        console.log(key)
-        newState = insertLineText(newState, key, "unstyled", "BOLD");
-        newState = insertLineText(newState, data[title][i][key], "unstyled", "")
+        newState = insertLineText(newState, key, "unstyled", "BOLD", "", "");
+        newState = insertLineText(newState, data[title][i][key], "unstyled", "", "", "")
       }
-      newState = insertLineText(newState, "", "unstyled", "")  // insert empty line
+      newState = insertLineText(newState, "", "unstyled", "", "", "")  // insert empty line
     }
 
   }else if(data[title] instanceof Object){
 
     // an object
     for(let key in data[title]){
-      newState = insertLineText(newState, key, "unstyled", "BOLD");
-      newState = insertLineText(newState, data[title][key], "unstyled", "")
+      newState = insertLineText(newState, key, "unstyled", "BOLD", "", "");
+      newState = insertLineText(newState, data[title][key], "unstyled", "", "", "")
     }
   }else{
-    newState = insertLineText(newState, data[title], "unstyled", "")
+    newState = insertLineText(newState, data[title], "unstyled", "", "", "")
   }
 
   // insertLineText(editorState, "First text", "unstyled", "BOLD");

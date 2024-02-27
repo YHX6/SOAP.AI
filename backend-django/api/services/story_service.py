@@ -20,19 +20,7 @@ def documentation_tool_task(req):
 
         
     # for each task, write logic here
-    if task == "ASK_STORY":
-        try:                                                        
-            resp = OpenAIAPI.send_prompt(prompt = prompt+ " "+  PromptTemplate.ask_story(username))
-            res = parse_to_json(resp)  # parse response into　 json
-        except:
-            resp = OpenAIAPI.send_prompt(prompt = prompt+ " "+  PromptTemplate.ask_story(username))
-            res = parse_to_json(resp)
-
-        return res
-    
-    elif task == "ASK_SUBJECT":
-        print( req["prompt"])
-        print(req["content"])
+    if task == "ASK_SUBJECT":
         aiprompt, content =  req["prompt"], req["content"]
 
         messages = PromptTemplate.wrap_setting(prompt=PromptTemplate.get_Subject(description=content))
@@ -43,7 +31,6 @@ def documentation_tool_task(req):
         return {"data":res, "title": "Subject"}
     
     elif task == "ASK_OBJECT":
-        print(req["transcript"])
         aiprompt, transcript, notes =  req["prompt"], req["transcript"], req["notes"]
 
         messages = PromptTemplate.wrap_setting(prompt=PromptTemplate.get_Object(transcript=transcript))
