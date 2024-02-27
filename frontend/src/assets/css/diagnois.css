@@ -18,12 +18,120 @@
 
 /************************* key words  ********************/
 .diagnois-page-left-top{
-    background-color: red;
+    width: 100%;
     height: 30%;
+
+    display: flex;
+    flex-direction: column;
+
+}
+.keyword-container{
+    height: 100%;
+    background-color: #fff;
+    padding: 10px 10px;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+    border-radius: 2px;
+}
+
+.keyword-table-header{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.keyword-table-body{
+    height: calc(100% - 63px);
+    flex-grow: 1;
+    overflow: auto;
+}
+
+.keyword-table-row{
+    display: flex;
+    flex-direction: row;
+    line-height: 1.5rem;
+    border-bottom: 1px solid #999;
+}
+.keyword-table-header .keyword-table-row{
+    border-bottom: 2px solid #666;
+}
+
+.keyword-table-row span{
+    text-align: left;
+    padding: 3px 5px;
+}
+.keyword-table-row span:first-child{
+    width: 50%;
+}
+.keyword-table-row span:nth-child(2){
+    width: 25%;
+}
+
+.keyword-table-row span:nth-child(3){
+    width: 20%;
+}
+.keyword-table-row span:nth-child(4){
+    width: 5%;
+}
+
+.keyword-table-input{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.keyword-table-input input{
+    display: block;
+    height: 1rem;
+    padding: 15px 10px;
+    border-radius: 12px;
+    border: 1px solid #888;
+    width: 100%;
+    outline: none;
+}
+.keyword-table-input input:first-child{
+    /* 100 - 20 */
+    width: calc(50%);
+    /* width: 30%; */
+}
+.keyword-table-input div{
+    /* width: calc(25%); */
+    flex-grow: 1;
+}
+
+.keyword-table-input input:nth-child(2){
+    /* 100 - 20 */
+    width: calc(25%);
+}
+
+.keyword-table-input button{
+    /* 100 - 20 */
+    width: calc(5%);
+    /* padding: 0 15px 0 0px; */
+}
+.table-operation{
+    background-color: inherit;
+    border: none;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+.table-operation:hover{
+    cursor: pointer;
 }
 
 
-
+/* scroll bar */
+.scrobar-1::-webkit-scrollbar {
+    width: 8px;               /* width of the entire scrollbar */
+  }
+  
+.scrobar-1::-webkit-scrollbar-track {
+    background: inherit;        /* color of the tracking area */
+  }
+  
+.scrobar-1::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.6);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+   
+  }
 
 /************************* key transcripts  ********************/
 
