@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AudioIcon from "../assets/icons/audio-fill.svg";
+import recordVoiceIcon from '../assets/icons/voiceRec5.svg';
+import recordingVoiceIcon from '../assets/icons/voiceRec6.svg';
 import AudioCurrentIcon from "../assets/icons/audio.svg";
 
 
@@ -43,9 +45,9 @@ const SpeechButton = ({ onTranscript }) => {
   }
 
   return (
-      <button onClick={toggleListen}>
+      <button className='voice-btn' onClick={toggleListen}>
         {isListening ? 
-            <img src={AudioCurrentIcon} alt="click button for audio input"></img> : <img src={AudioIcon} alt="click button for audio input"></img>
+            <img src={recordingVoiceIcon} alt="click button for audio input"></img> : <img src={recordVoiceIcon} alt="click button for audio input"></img>
         }
         </button>
   );
