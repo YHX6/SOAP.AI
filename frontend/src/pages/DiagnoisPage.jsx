@@ -4,12 +4,13 @@ import SpeechButton from "../components/SpeechButton";
 import { useRef, useState } from "react";
 import axios from "axios";
 import { documentToolRouter } from "../config/routeConfig";
+import { getCurrentTimeFormatted } from "../utils/util";
 
 
 
 const defaultKeywordList = [
-    {word:"HADD", tag:"Ideation", from:"John"},
-    {word:"Asd", tag:"testtag", from:"Amy"},
+    // {word:"HADD", tag:"Ideation", time:"John"},
+    // {word:"Asd", tag:"testtag", time:"Amy"},
 ]
 
 
@@ -18,18 +19,19 @@ function DiagnosisPage() {
     const [keywords, setKeywords] = useState(defaultKeywordList);
     const [inputWord, setInputWord] = useState("");
     const [inputTag, setInputTag] = useState("");
-    const [inputFrom, setInputFrom] = useState("");
+    // const [inputTime, setInputTime] = useState("");
     const removeKeyword = (kw) => {
         setKeywords(keywords.filter(item => item.word !== kw));
     }
     const addkeyword = () => {
         let w = inputWord;
         let t = inputTag;
-        let f = inputFrom;
-        setKeywords([...keywords, {word:w, tag:t, from:f}])
+        // let f = inputTime;
+        let currentTime = getCurrentTimeFormatted();
+        setKeywords([...keywords, {word:w, tag:t, time:currentTime}])
         setInputWord("");
         setInputTag("");
-        setInputFrom("");
+        // setInputTime("");
     }
 
 
@@ -71,7 +73,7 @@ function DiagnosisPage() {
                                 <div className="keyword-table-row">
                                     <span>Key Words</span>
                                     <span>Tag</span>
-                                    <span>Therapist</span>
+                                    <span>Time</span>
                                     <span></span>
                                 </div>
                             </div>
@@ -82,7 +84,7 @@ function DiagnosisPage() {
                                         <div className="keyword-table-row" key={i}>
                                             <span>{item.word}</span>
                                             <span>{item.tag}</span>
-                                            <span>{item.from}</span>
+                                            <span>{item.time}</span>
                                             <span className="table-operation" onClick={() => removeKeyword(item.word)}>-</span>
                                         </div>
 
@@ -93,7 +95,8 @@ function DiagnosisPage() {
                             <div className="keyword-table-input">
                                 <input type="text" value={inputWord} onChange={(e) => setInputWord(e.target.value)}></input>
                                 <input type="text" value={inputTag} onChange={(e) => setInputTag(e.target.value)}></input>
-                                <input type="text" value={inputFrom} onChange={(e) => setInputFrom(e.target.value)}></input>
+                                <div></div>
+                                {/* <input type="text" value={inputFrom} onChange={(e) => setInputFrom(e.target.value)}></input> */}
                                 <button className="table-operation" onClick={addkeyword}>+</button>
                             </div>
 
