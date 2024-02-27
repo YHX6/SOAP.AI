@@ -98,37 +98,180 @@ function DiagnosisPage() {
 
     };
 
-    const addEditorSection = (selectedOption, customizedOption, AIpromp) => {
+    const addEditorSection = (selectedOption, customizedOption, AIprompt) => {
         if(selectedOption === "Basic Information"){
             if(editorRef.current){
                 editorRef.current.setRawContent(wrapBasicInformation());
             }
         }else if (selectedOption === "S (Subject)"){
-            if(editorRef.current){
-                editorRef.current.setRawContent(wrapSubject());
-            }
+            axios.post(documentToolRouter, {
+                task: "ASK_SUBJECT",
+                prompt:AIprompt,
+                content: `Patient 1: Alice Johnson
+                Medical and Mental History: Alice is a 34-year-old marketing professional with a history of Generalized Anxiety Disorder (GAD) diagnosed five years ago. She has been on selective serotonin reuptake inhibitors (SSRIs) for the past four years, with moderate success. Her medical history includes asthma, which is well-managed with medication. Alice has no history of substance abuse or significant physical health issues. She has been in individual therapy for three years before transitioning to group therapy to enhance her coping skills and expand her support network.
+                
+                Complaints and Problems: Alice reports experiencing heightened anxiety levels in the past six months, attributed to increased work pressure and looming deadlines. She struggles with constant worry, difficulty concentrating, and sleep disturbances, averaging about 4-5 hours of sleep per night. Alice also mentions feeling overwhelmed by daily tasks and has noticed a decline in her work performance and satisfaction. Socially, she feels withdrawn and has been avoiding gatherings, fearing she might be judged or not perform well in social settings.
+                
+                Patient 2: Bob Miller
+                Medical and Mental History: Bob is a 28-year-old freelance graphic designer who has struggled with episodic Major Depressive Disorder (MDD) and anxiety since his late teens. He experienced his first depressive episode at 19, which was treated with a combination of cognitive-behavioral therapy (CBT) and antidepressants. Bob has had three major episodes of depression in the past nine years, with the most recent episode starting about six months ago. His medical history is unremarkable, though he mentions occasional insomnia and stress-related gastrointestinal issues.
+                
+                Complaints and Problems: Bob's current complaints revolve around persistent low mood, lack of motivation, and anhedonia, particularly concerning his work and hobbies, which he used to find fulfilling. He reports significant anxiety about financial stability and finding consistent work, exacerbating his depressive symptoms. Bob struggles with self-esteem issues, often feeling worthless and criticizing himself harshly for not meeting his own expectations or those he perceives from others. He has difficulty initiating and maintaining social interactions, leading to isolation and increased reliance on social media for connection, which he finds unsatisfactory and sometimes harmful.
+                
+                `,
+            })
+            .then((resp) => {
+                // receive the response and add it to right editor
+                if(editorRef.current){
+
+                    // console.log(resp.data)
+                    editorRef.current.insertMultipleTexts(resp.data.data, resp.data.title);
+    
+                }
+            })
+            .catch((e) => alert(e));
         }else if (selectedOption === "O (Object)"){
-            if(editorRef.current){
-                // editorRef.current.setRawContent(wrapObject());
-                console.log("asd")
-                // editorRef.current.appendTextToEditor("qweqw eqa")
-                // editorRef.current.insertCenterAlignedText("asdasd"); 
-                editorRef.current.insertCenterAlignedText("asdqwe", "center");
-                // for(let i=0; i<3; i++){
-                //     console.log("asd");
-                    
-                //     // editorRef.current.insertOrderedList("asdasd");
-                //     editorRef.current.insertMultipleTexts("asd");
-                // } 
-               
-                // editorRef.current.appendStyledText("asd", ["BOLD", "ITALIC", "unordered_list"])
-            }
+            axios.post(documentToolRouter, {
+                task: "ASK_OBJECT",
+                prompt:AIprompt,
+                notes: "",
+                transcript: `Patient 1: Alice Johnson
+                Medical and Mental History: Alice is a 34-year-old marketing professional with a history of Generalized Anxiety Disorder (GAD) diagnosed five years ago. She has been on selective serotonin reuptake inhibitors (SSRIs) for the past four years, with moderate success. Her medical history includes asthma, which is well-managed with medication. Alice has no history of substance abuse or significant physical health issues. She has been in individual therapy for three years before transitioning to group therapy to enhance her coping skills and expand her support network.
+                
+                Complaints and Problems: Alice reports experiencing heightened anxiety levels in the past six months, attributed to increased work pressure and looming deadlines. She struggles with constant worry, difficulty concentrating, and sleep disturbances, averaging about 4-5 hours of sleep per night. Alice also mentions feeling overwhelmed by daily tasks and has noticed a decline in her work performance and satisfaction. Socially, she feels withdrawn and has been avoiding gatherings, fearing she might be judged or not perform well in social settings.
+                
+                Patient 2: Bob Miller
+                Medical and Mental History: Bob is a 28-year-old freelance graphic designer who has struggled with episodic Major Depressive Disorder (MDD) and anxiety since his late teens. He experienced his first depressive episode at 19, which was treated with a combination of cognitive-behavioral therapy (CBT) and antidepressants. Bob has had three major episodes of depression in the past nine years, with the most recent episode starting about six months ago. His medical history is unremarkable, though he mentions occasional insomnia and stress-related gastrointestinal issues.
+                
+                Complaints and Problems: Bob's current complaints revolve around persistent low mood, lack of motivation, and anhedonia, particularly concerning his work and hobbies, which he used to find fulfilling. He reports significant anxiety about financial stability and finding consistent work, exacerbating his depressive symptoms. Bob struggles with self-esteem issues, often feeling worthless and criticizing himself harshly for not meeting his own expectations or those he perceives from others. He has difficulty initiating and maintaining social interactions, leading to isolation and increased reliance on social media for connection, which he finds unsatisfactory and sometimes harmful.
+                
+                `,
+            })
+            .then((resp) => {
+                // receive the response and add it to right editor
+                if(editorRef.current){
+
+                    console.log(resp.data)
+                    editorRef.current.insertMultipleTexts(resp.data.data, resp.data.title);
+    
+                }
+            })
+            .catch((e) => alert(e));
+
         }else if (selectedOption === "A (Assessment)"){
-            
+            axios.post(documentToolRouter, {
+                task: "ASK_ASSESSMENT",
+                prompt:AIprompt,
+                notes: "",
+                transcript: `Patient 1: Alice Johnson
+                Medical and Mental History: Alice is a 34-year-old marketing professional with a history of Generalized Anxiety Disorder (GAD) diagnosed five years ago. She has been on selective serotonin reuptake inhibitors (SSRIs) for the past four years, with moderate success. Her medical history includes asthma, which is well-managed with medication. Alice has no history of substance abuse or significant physical health issues. She has been in individual therapy for three years before transitioning to group therapy to enhance her coping skills and expand her support network.
+                
+                Complaints and Problems: Alice reports experiencing heightened anxiety levels in the past six months, attributed to increased work pressure and looming deadlines. She struggles with constant worry, difficulty concentrating, and sleep disturbances, averaging about 4-5 hours of sleep per night. Alice also mentions feeling overwhelmed by daily tasks and has noticed a decline in her work performance and satisfaction. Socially, she feels withdrawn and has been avoiding gatherings, fearing she might be judged or not perform well in social settings.
+                
+                Patient 2: Bob Miller
+                Medical and Mental History: Bob is a 28-year-old freelance graphic designer who has struggled with episodic Major Depressive Disorder (MDD) and anxiety since his late teens. He experienced his first depressive episode at 19, which was treated with a combination of cognitive-behavioral therapy (CBT) and antidepressants. Bob has had three major episodes of depression in the past nine years, with the most recent episode starting about six months ago. His medical history is unremarkable, though he mentions occasional insomnia and stress-related gastrointestinal issues.
+                
+                Complaints and Problems: Bob's current complaints revolve around persistent low mood, lack of motivation, and anhedonia, particularly concerning his work and hobbies, which he used to find fulfilling. He reports significant anxiety about financial stability and finding consistent work, exacerbating his depressive symptoms. Bob struggles with self-esteem issues, often feeling worthless and criticizing himself harshly for not meeting his own expectations or those he perceives from others. He has difficulty initiating and maintaining social interactions, leading to isolation and increased reliance on social media for connection, which he finds unsatisfactory and sometimes harmful.
+                
+                `,
+                description: `Patient 1: Alice Johnson
+                Medical and Mental History: Alice is a 34-year-old marketing professional with a history of Generalized Anxiety Disorder (GAD) diagnosed five years ago. She has been on selective serotonin reuptake inhibitors (SSRIs) for the past four years, with moderate success. Her medical history includes asthma, which is well-managed with medication. Alice has no history of substance abuse or significant physical health issues. She has been in individual therapy for three years before transitioning to group therapy to enhance her coping skills and expand her support network.
+                
+                Complaints and Problems: Alice reports experiencing heightened anxiety levels in the past six months, attributed to increased work pressure and looming deadlines. She struggles with constant worry, difficulty concentrating, and sleep disturbances, averaging about 4-5 hours of sleep per night. Alice also mentions feeling overwhelmed by daily tasks and has noticed a decline in her work performance and satisfaction. Socially, she feels withdrawn and has been avoiding gatherings, fearing she might be judged or not perform well in social settings.
+                
+                Patient 2: Bob Miller
+                Medical and Mental History: Bob is a 28-year-old freelance graphic designer who has struggled with episodic Major Depressive Disorder (MDD) and anxiety since his late teens. He experienced his first depressive episode at 19, which was treated with a combination of cognitive-behavioral therapy (CBT) and antidepressants. Bob has had three major episodes of depression in the past nine years, with the most recent episode starting about six months ago. His medical history is unremarkable, though he mentions occasional insomnia and stress-related gastrointestinal issues.
+                
+                Complaints and Problems: Bob's current complaints revolve around persistent low mood, lack of motivation, and anhedonia, particularly concerning his work and hobbies, which he used to find fulfilling. He reports significant anxiety about financial stability and finding consistent work, exacerbating his depressive symptoms. Bob struggles with self-esteem issues, often feeling worthless and criticizing himself harshly for not meeting his own expectations or those he perceives from others. He has difficulty initiating and maintaining social interactions, leading to isolation and increased reliance on social media for connection, which he finds unsatisfactory and sometimes harmful.
+                
+                `,
+            })
+            .then((resp) => {
+                // receive the response and add it to right editor
+                if(editorRef.current){
+
+                    console.log(resp.data)
+                    editorRef.current.insertMultipleTexts(resp.data.data, resp.data.title);
+    
+                }
+            })
+            .catch((e) => alert(e));
         }else if (selectedOption === "P (Plan)"){
-            
+            axios.post(documentToolRouter, {
+                task: "ASK_PLAN",
+                prompt:AIprompt,
+                notes: "",
+                transcript: `Patient 1: Alice Johnson
+                Medical and Mental History: Alice is a 34-year-old marketing professional with a history of Generalized Anxiety Disorder (GAD) diagnosed five years ago. She has been on selective serotonin reuptake inhibitors (SSRIs) for the past four years, with moderate success. Her medical history includes asthma, which is well-managed with medication. Alice has no history of substance abuse or significant physical health issues. She has been in individual therapy for three years before transitioning to group therapy to enhance her coping skills and expand her support network.
+                
+                Complaints and Problems: Alice reports experiencing heightened anxiety levels in the past six months, attributed to increased work pressure and looming deadlines. She struggles with constant worry, difficulty concentrating, and sleep disturbances, averaging about 4-5 hours of sleep per night. Alice also mentions feeling overwhelmed by daily tasks and has noticed a decline in her work performance and satisfaction. Socially, she feels withdrawn and has been avoiding gatherings, fearing she might be judged or not perform well in social settings.
+                
+                Patient 2: Bob Miller
+                Medical and Mental History: Bob is a 28-year-old freelance graphic designer who has struggled with episodic Major Depressive Disorder (MDD) and anxiety since his late teens. He experienced his first depressive episode at 19, which was treated with a combination of cognitive-behavioral therapy (CBT) and antidepressants. Bob has had three major episodes of depression in the past nine years, with the most recent episode starting about six months ago. His medical history is unremarkable, though he mentions occasional insomnia and stress-related gastrointestinal issues.
+                
+                Complaints and Problems: Bob's current complaints revolve around persistent low mood, lack of motivation, and anhedonia, particularly concerning his work and hobbies, which he used to find fulfilling. He reports significant anxiety about financial stability and finding consistent work, exacerbating his depressive symptoms. Bob struggles with self-esteem issues, often feeling worthless and criticizing himself harshly for not meeting his own expectations or those he perceives from others. He has difficulty initiating and maintaining social interactions, leading to isolation and increased reliance on social media for connection, which he finds unsatisfactory and sometimes harmful.
+                
+                `,
+                description: `Patient 1: Alice Johnson
+                Medical and Mental History: Alice is a 34-year-old marketing professional with a history of Generalized Anxiety Disorder (GAD) diagnosed five years ago. She has been on selective serotonin reuptake inhibitors (SSRIs) for the past four years, with moderate success. Her medical history includes asthma, which is well-managed with medication. Alice has no history of substance abuse or significant physical health issues. She has been in individual therapy for three years before transitioning to group therapy to enhance her coping skills and expand her support network.
+                
+                Complaints and Problems: Alice reports experiencing heightened anxiety levels in the past six months, attributed to increased work pressure and looming deadlines. She struggles with constant worry, difficulty concentrating, and sleep disturbances, averaging about 4-5 hours of sleep per night. Alice also mentions feeling overwhelmed by daily tasks and has noticed a decline in her work performance and satisfaction. Socially, she feels withdrawn and has been avoiding gatherings, fearing she might be judged or not perform well in social settings.
+                
+                Patient 2: Bob Miller
+                Medical and Mental History: Bob is a 28-year-old freelance graphic designer who has struggled with episodic Major Depressive Disorder (MDD) and anxiety since his late teens. He experienced his first depressive episode at 19, which was treated with a combination of cognitive-behavioral therapy (CBT) and antidepressants. Bob has had three major episodes of depression in the past nine years, with the most recent episode starting about six months ago. His medical history is unremarkable, though he mentions occasional insomnia and stress-related gastrointestinal issues.
+                
+                Complaints and Problems: Bob's current complaints revolve around persistent low mood, lack of motivation, and anhedonia, particularly concerning his work and hobbies, which he used to find fulfilling. He reports significant anxiety about financial stability and finding consistent work, exacerbating his depressive symptoms. Bob struggles with self-esteem issues, often feeling worthless and criticizing himself harshly for not meeting his own expectations or those he perceives from others. He has difficulty initiating and maintaining social interactions, leading to isolation and increased reliance on social media for connection, which he finds unsatisfactory and sometimes harmful.
+                
+                `,
+            })
+            .then((resp) => {
+                // receive the response and add it to right editor
+                if(editorRef.current){
+
+                    console.log(resp.data)
+                    editorRef.current.insertMultipleTexts(resp.data.data, resp.data.title);
+    
+                }
+            })
+            .catch((e) => alert(e));
         }else if (selectedOption === "Customize"){
-            
+            axios.post(documentToolRouter, {
+                task: "ASK_CUSTOMIZE",
+                prompt:AIprompt,
+                notes: "",
+                section_name:customizedOption,
+                transcript: `Patient 1: Alice Johnson
+                Medical and Mental History: Alice is a 34-year-old marketing professional with a history of Generalized Anxiety Disorder (GAD) diagnosed five years ago. She has been on selective serotonin reuptake inhibitors (SSRIs) for the past four years, with moderate success. Her medical history includes asthma, which is well-managed with medication. Alice has no history of substance abuse or significant physical health issues. She has been in individual therapy for three years before transitioning to group therapy to enhance her coping skills and expand her support network.
+                
+                Complaints and Problems: Alice reports experiencing heightened anxiety levels in the past six months, attributed to increased work pressure and looming deadlines. She struggles with constant worry, difficulty concentrating, and sleep disturbances, averaging about 4-5 hours of sleep per night. Alice also mentions feeling overwhelmed by daily tasks and has noticed a decline in her work performance and satisfaction. Socially, she feels withdrawn and has been avoiding gatherings, fearing she might be judged or not perform well in social settings.
+                
+                Patient 2: Bob Miller
+                Medical and Mental History: Bob is a 28-year-old freelance graphic designer who has struggled with episodic Major Depressive Disorder (MDD) and anxiety since his late teens. He experienced his first depressive episode at 19, which was treated with a combination of cognitive-behavioral therapy (CBT) and antidepressants. Bob has had three major episodes of depression in the past nine years, with the most recent episode starting about six months ago. His medical history is unremarkable, though he mentions occasional insomnia and stress-related gastrointestinal issues.
+                
+                Complaints and Problems: Bob's current complaints revolve around persistent low mood, lack of motivation, and anhedonia, particularly concerning his work and hobbies, which he used to find fulfilling. He reports significant anxiety about financial stability and finding consistent work, exacerbating his depressive symptoms. Bob struggles with self-esteem issues, often feeling worthless and criticizing himself harshly for not meeting his own expectations or those he perceives from others. He has difficulty initiating and maintaining social interactions, leading to isolation and increased reliance on social media for connection, which he finds unsatisfactory and sometimes harmful.
+                
+                `,
+                description: `Patient 1: Alice Johnson
+                Medical and Mental History: Alice is a 34-year-old marketing professional with a history of Generalized Anxiety Disorder (GAD) diagnosed five years ago. She has been on selective serotonin reuptake inhibitors (SSRIs) for the past four years, with moderate success. Her medical history includes asthma, which is well-managed with medication. Alice has no history of substance abuse or significant physical health issues. She has been in individual therapy for three years before transitioning to group therapy to enhance her coping skills and expand her support network.
+                
+                Complaints and Problems: Alice reports experiencing heightened anxiety levels in the past six months, attributed to increased work pressure and looming deadlines. She struggles with constant worry, difficulty concentrating, and sleep disturbances, averaging about 4-5 hours of sleep per night. Alice also mentions feeling overwhelmed by daily tasks and has noticed a decline in her work performance and satisfaction. Socially, she feels withdrawn and has been avoiding gatherings, fearing she might be judged or not perform well in social settings.
+                
+                Patient 2: Bob Miller
+                Medical and Mental History: Bob is a 28-year-old freelance graphic designer who has struggled with episodic Major Depressive Disorder (MDD) and anxiety since his late teens. He experienced his first depressive episode at 19, which was treated with a combination of cognitive-behavioral therapy (CBT) and antidepressants. Bob has had three major episodes of depression in the past nine years, with the most recent episode starting about six months ago. His medical history is unremarkable, though he mentions occasional insomnia and stress-related gastrointestinal issues.
+                
+                Complaints and Problems: Bob's current complaints revolve around persistent low mood, lack of motivation, and anhedonia, particularly concerning his work and hobbies, which he used to find fulfilling. He reports significant anxiety about financial stability and finding consistent work, exacerbating his depressive symptoms. Bob struggles with self-esteem issues, often feeling worthless and criticizing himself harshly for not meeting his own expectations or those he perceives from others. He has difficulty initiating and maintaining social interactions, leading to isolation and increased reliance on social media for connection, which he finds unsatisfactory and sometimes harmful.
+                
+                `,
+            })
+            .then((resp) => {
+                // receive the response and add it to right editor
+                if(editorRef.current){
+
+                    console.log(resp.data)
+                    editorRef.current.insertMultipleTexts(resp.data.data, resp.data.title);
+    
+                }
+            })
+            .catch((e) => alert(e));
         }
 
         // console.log(selectedOption)

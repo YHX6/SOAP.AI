@@ -502,10 +502,43 @@ const insertLineText = (editorState, text, blockType, inlineStyle) => {
   return newEditorState;
 };
 
-const insertMultipleTexts = (data) => {
-  let newState = insertLineText(editorState, "First text", "unstyled", "BOLD");
-  newState = insertLineText(newState, "Second text", "ordered-list-item", "BOLD");
-  newState = insertLineText(newState, "Third text", "unordered-list-item", "ITALIC");
+const insertMultipleTexts = (data, title) => {
+  let newState = editorState;
+  // newState = insertLineText(newState, "First text", "unstyled", "BOLD");
+  // newState = insertLineText(newState, "Second text", "ordered-list-item", "BOLD");
+  // newState = insertLineText(newState, "Third text", "unordered-list-item", "ITALIC");
+  newState = insertLineText(newState, title, "unstyled", "BOLD");
+  newState = insertLineText(newState, "", "unstyled", "")  // insert empty line
+
+  console.log(data);
+  console.log(title)
+  console.log(data[title][0]);
+  console.log(typeof data[title])
+  if(data[title] instanceof Array){
+    // if array of object
+    for(let i=0; i<data[title].length; i++){
+      for(let key in data[title][i]){
+        console.log(key)
+        newState = insertLineText(newState, key, "unstyled", "BOLD");
+        newState = insertLineText(newState, data[title][i][key], "unstyled", "")
+      }
+      newState = insertLineText(newState, "", "unstyled", "")  // insert empty line
+    }
+
+  }else if(data[title] instanceof Object){
+
+    // an object
+    for(let key in data[title]){
+      newState = insertLineText(newState, key, "unstyled", "BOLD");
+      newState = insertLineText(newState, data[title][key], "unstyled", "")
+    }
+  }else{
+    newState = insertLineText(newState, data[title], "unstyled", "")
+  }
+
+  // insertLineText(editorState, "First text", "unstyled", "BOLD");
+  // newState = insertLineText(newState, "Second text", "ordered-list-item", "BOLD");
+  // newState = insertLineText(newState, "Third text", "unordered-list-item", "ITALIC");
   setEditorState(newState); // Finally, update the state with the latest newState
 };
 
@@ -542,8 +575,8 @@ const insertMultipleTexts = (data) => {
     // insertUnOrderedList(content){
     //   return insertUnOrderedList(content);
     // },
-    insertMultipleTexts(data){
-      insertMultipleTexts(data);
+    insertMultipleTexts(data, title){
+      insertMultipleTexts(data, title);
     },
   }))
 

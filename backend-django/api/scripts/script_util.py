@@ -1,79 +1,95 @@
 class PromptTemplate:
 
     @staticmethod
-    def wrap_prompt_settings(prompt):
-        return "asd"
+    def wrap_setting(prompt):
+        return [
+            {"role":"system", "content":"You are an assistant agent to help mental health therapist to write their documentation of the therapy. You need to help to extract information from the audio transcript. Do not give your analysis report."},
+            {"role":"user", "content":prompt}
+        ]
 
-    # Below are some of the prompt example of our previous project
 
-    # @staticmethod
-    # def wrap_prompt_head(prompt):
-    #     return "You are a story generator for a role-playing game for children. The user plays the main character, and you create random follow-up stories, to help the children experience the entire narrative. This is the previous story: " + prompt
-    
-    # @staticmethod
-    # def ask_story(username):
-    #     return """Using the preceding story, generate the next storyline in 30 words. It is for children's reading so you need to make your response easy and simple. Present the outcome in JSON format with the following structure:
-    
-    #     Desired format:
-    #     {{    
-    #         story: <STRING>
-    #     }}""".format(username=username)
-
-    # @staticmethod
-    # def ask_options(username):
-    #     return """Using the preceding story, generate the next storyline in 30 words. Include a decision-making question and three options. The question should be in 15 words and each option in 3 to 5 words. Present the results in JSON format as follows:
+    @staticmethod
+    def get_Subject(description):
+        return """Generete a structured repsonse by extracting the information for each patient from the description and return in structured format. If there are some part of information that are not mentioned in description, fill that part with {{TBD}}. This is the description: {{{description}}}. Return your response in following JSON format.
         
-    #     Desired format:
-    #     {{    
-    #         question: <STRING>,
-    #         option_1: <STRING>,
-    #         option_2: <STRING>,
-    #         option_3: <STRING>,
-    #     }}""".format(username=username)
-
-    # @staticmethod
-    # def continue_options(username, choice):
-    #     return  """{username} made his choice as: {choice}. Generate the next storyline in 30 words. It is for children's reading so you need to make your response easy and simple. Present the outcome in JSON format with the following structure:
-
-    #     Desired format:
-    #     {{    
-    #         story: <STRING>
-    #     }}""".format(username=username,choice=choice)
-
-    # @staticmethod
-    # def ask_character(username):
-    #     return """Using the preceding story, generate the next storyline in 30 words. Include a character that {username} is going to converse with. Give a short description of this character and provide the character's first sentence he/she said to {username} in the conversation. Present the results in JSON format as specified:
-        
-    #     Desired format:
-    #     {{    
-    #         character_name: <STRING>,
-    #         character_description: <STRING>,
-    #         first_sentence: <STRING>,
-    #     }}""".format(username=username)
-
-    # @staticmethod
-    # def get_chat_background(username, character_name, character_description, prompt):
-    #     return """You are a role-playing agent. Now you should play the character: {character_name}. The user will be: {username}. Your job is to have a conversation with {username} as if you are the {character_name} in the following story. This is your role description: {character_description}. Your response should be less than 15 words and simple. The following is the story background of how {username} meets {character_name}:
-        
-    # Backgroud Story:
-    #     {{{prompt}}}""".format(username = username, character_name=character_name, character_description=character_description,  prompt=prompt)
+        Desired format:
+        {{
+        "Subject":[
+            {{"Patient Name":<String>, "Medical and Mental History":<STRING>, "Complaints and problems":<STRING>}},
+            {{"Patient Name":<String>, "Medical and Mental History":<STRING>, "Complaints and problems":<STRING>}},
+        ]
+        }}
+        """.format(description=description)
     
+    @staticmethod
+    def get_Object(transcript):
+        return """Generete a structured repsonse by extracting the information for each patient from the description and return in structured format. If there are some part of information that are not mentioned in description, fill that part with {{TBD}}. This is the transcript: {{{transcript}}}. Return your response in following JSON format.
+        
+        Desired format:
+        {{
+        "Object":[
+            {{"Patient Name":<String>, "Physical observations":<STRING>, "Psychological observations":<STRING>}},
+            {{"Patient Name":<String>, "Physical observations":<STRING>, "Psychological observations":<STRING>}},
+        ]
+        }}
+        """.format(transcript=transcript)
+    
+    @staticmethod
+    def get_Assessment(description, transcript, aiprompt, notes):
+        return """Generete a structured repsonse by extracting the information for each patient and return in structured format. Emphasize on the doctors' requirement and audio transcript and do not describe patient's demographical information. If there are some part of information that are not mentioned, fill that part with {{TBD}}. 
+        Medical history: {{{description}}}
+        Audio transcript of therapy: {{{transcript}}}
+        Doctors' notes: {{{notes}}}
+        Doctors' requirement: {{{aiprompt}}} 
+        Return your response in following JSON format.
+        
+        Desired format:
+        {{
+        "Assessment":[
+            {{"Patient Name":<String>, "DSM criterial/therapeutic Model":<STRING>, "Clinical and professional knowledge":<STRING>}},
+            {{"Patient Name":<String>, "DSM criterial/therapeutic Model":<STRING>, "Clinical and professional knowledge":<STRING>}},
+        ]
+        }}
+        """.format(description=description, transcript=transcript, aiprompt=aiprompt, notes=str(notes))
 
-    # @staticmethod
-    # def map_messages(message, character_name, username):
-    #     return (username if message["role"] == "user" else character_name) + ": \""+ message["content"] + "\""
- 
-    # @staticmethod
-    # def end_conversation(messages, character_name, username):
-    #     return """This is the conversation {username} had with the character: {conversation}. Using the preceding story and conversation, generate the next storyline in 30 words. It is for children's reading so you need to make your response easy and simple. Present the outcome in JSON format with the following structure:
-
-    #     Desired format:
-    #     {{ 
-    #         story: <STRING>,
-    #     }}""".format(username=username, conversation=str([PromptTemplate.map_messages(message, character_name, username) for message in messages[1:]]))
 
 
-    # # summarize
-    # @staticmethod
-    # def summarize_prompt(prompt):
-    #     return "Summarize the story in 150 words: " + prompt
+       
+    @staticmethod
+    def get_Plan(description, transcript, aiprompt, notes):
+        return """Generete a structured repsonse by extracting the information for each patient and return in structured format. Emphasize on the doctors' requirement and audio transcript and do not describe patient's demographical information. If there are some part of information that are not mentioned, fill that part with {{TBD}}. 
+        Medical history: {{{description}}}
+        Audio transcript of therapy: {{{transcript}}}
+        Doctors' notes: {{{notes}}}
+        Doctors' requirement: {{{aiprompt}}} 
+        Return your response in following JSON format.
+        
+        Desired format:
+        {{
+        "Plan":[
+            {{"Patient Name":<String>, "Next steps for upcoming session":<STRING>, "How to implement treatment plan":<STRING>}},
+            {{"Patient Name":<String>, "Next steps for upcoming session":<STRING>, "How to implement treatment plan":<STRING>}},
+        ]
+        }}
+        """.format(description=description, transcript=transcript, aiprompt=aiprompt, notes=str(notes))
+
+
+    @staticmethod
+    def get_customized_section(description, transcript, aiprompt, notes, section_name):
+        return """Generete a structured repsonse by extracting the information for each patient and return in structured format. Emphasize on the doctors' requirement and audio transcript and do not describe patient's demographical information. If there are some part of information that are not mentioned, fill that part with {{TBD}}. 
+        Medical history: {{{description}}}
+        Audio transcript of therapy: {{{transcript}}}
+        Doctors' notes: {{{notes}}}
+        Doctors' requirement: {{{aiprompt}}} 
+        Return your response in following JSON format.
+        
+        Desired format:
+        {{
+        "{{{section_name}}}":[
+            {{"Patient Name":<String>, "Content":<STRING>}},
+            {{"Patient Name":<String>, "Content":<STRING>}},
+        ]
+        }}
+        """.format(description=description, transcript=transcript, aiprompt=aiprompt, notes=str(notes), section_name=section_name)
+
+
