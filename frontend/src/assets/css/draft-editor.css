@@ -4,6 +4,70 @@
   font-size: 1rem;
 }
 
+/* ai button */
+.tool-btn-ai{
+  position: relative;
+}
+
+.editor-modal{
+  position: absolute;
+  padding: 10px;
+  z-index: 10;
+  width: 300px;
+  height: 200px;
+  top: 30px;
+  left: -290px;
+  background-color: #fff;
+  box-shadow: 0 0  5px rgba(0,0,0,0.3);
+
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.eidtor-modal-header{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.editor-modal-note{
+  font-size: 1rem;
+}
+.editor-modal textarea{
+  height: 70px;
+}
+.eiditor-modal-select{
+  border: 1px solid #888;
+  border-radius: 3px;
+  padding: 3px;
+  outline: none;
+  width: 153px;
+}
+.eiditor-modal-inpit{
+  border: 1px solid #888;
+  border-radius: 3px;
+  padding: 3px;
+  outline: none;
+  width: 100%;
+}
+.editor-modal-body-1{
+  margin-top: -5px;
+}
+.editor-modal-bottom{
+  display: flex;
+  justify-content: right;
+}
+
+.editor-modal-btn{
+  box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+  border-radius: 5px;
+  background-color: #aaa;
+}
+.height-holder{
+  height: 23.5px;
+}
+
 /* ********************************  set your font size and family here*************************************** */
   /* font family */  
   #editor-container .fontFamilySerif span{
