@@ -5,6 +5,7 @@ import { useEffect,useRef, useState } from "react";
 import axios from "axios";
 import { documentToolRouter } from "../config/routeConfig";
 import { getCurrentTimeFormatted } from "../utils/util";
+import { wrapBasicInformation, wrapObject, wrapSubject } from "../utils/editorWraper";
 
 
 
@@ -45,8 +46,8 @@ function DiagnosisPage() {
     }
 
 
-    const editor_1_Ref = useRef();
-    const editor_2_Ref = useRef();
+    const editorRef = useRef();
+
     const [messages, setMessages] = useState([
         {role: 'therapist', time: '02-26 18:46:28', conv: 'hello'}, 
 {role: 'patient', time: '02-26 18:46:31', conv: 'hello'},
@@ -84,14 +85,7 @@ function DiagnosisPage() {
         // setRoles([...roles, "therapist"]);
         console.log(messages);
     
-    /*  pre code
-        if(editor_1_Ref.current){
-            let currentContent = editor_1_Ref.current.getTextContent();
-            console.log(currentContent + text)
-            editor_1_Ref.current.setTextContent(currentContent + text);
-            console.log(editor_1_Ref.current);
-        }
-        */
+
     };
     const handleTranscriptPatient = (text) => {
         let inputContent = {
@@ -104,19 +98,58 @@ function DiagnosisPage() {
 
     };
 
+    const addEditorSection = (selectedOption, customizedOption, AIpromp) => {
+        if(selectedOption === "Basic Information"){
+            if(editorRef.current){
+                editorRef.current.setRawContent(wrapBasicInformation());
+            }
+        }else if (selectedOption === "S (Subject)"){
+            if(editorRef.current){
+                editorRef.current.setRawContent(wrapSubject());
+            }
+        }else if (selectedOption === "O (Object)"){
+            if(editorRef.current){
+                // editorRef.current.setRawContent(wrapObject());
+                console.log("asd")
+                // editorRef.current.appendTextToEditor("qweqw eqa")
+                // editorRef.current.insertCenterAlignedText("asdasd"); 
+                editorRef.current.insertCenterAlignedText("asdqwe", "center");
+                // for(let i=0; i<3; i++){
+                //     console.log("asd");
+                    
+                //     // editorRef.current.insertOrderedList("asdasd");
+                //     editorRef.current.insertMultipleTexts("asd");
+                // } 
+               
+                // editorRef.current.appendStyledText("asd", ["BOLD", "ITALIC", "unordered_list"])
+            }
+        }else if (selectedOption === "A (Assessment)"){
+            
+        }else if (selectedOption === "P (Plan)"){
+            
+        }else if (selectedOption === "Customize"){
+            
+        }
 
-    const sampleAPIRequest = () => {
-        axios.post(documentToolRouter, {
-            task: "TEST",
-            prompt:"test api",
-            content: editor_1_Ref.current.getTextContent(),
-        })
-        .then((resp) => {
-            // receive the response and add it to right editor
-            editor_2_Ref.current.setTextContent(resp.data);
-        })
-        .catch((e) => alert(e));
+        // console.log(selectedOption)
+        // console.log(customizedOption)
+        // console.log(AIpromp)
+
     }
+
+
+    // const sampleAPIRequest = () => {
+    //     axios.post(documentToolRouter, {
+    //         task: "TEST",
+    //         prompt:"test api",
+    //         content: editorRef.current.getTextContent(),
+    //     })
+    //     .then((resp) => {
+    //         // receive the response and add it to right editor
+    //         editorRef.current.setTextContent(resp.data);
+    //     })
+    //     .catch((e) => alert(e));
+    // }
 
 
     return ( 
@@ -124,7 +157,7 @@ function DiagnosisPage() {
             <div className="diagnois-page">
                 <div className="diagnois-page-left">
                     {/*  key words  component*/}
-                    <di className="diagnois-page-left-top">
+                    <div className="diagnois-page-left-top">
                         <div className="keyword-container">
                             <div className="keyword-table-header">
                                 <div className="keyword-table-row">
@@ -158,7 +191,7 @@ function DiagnosisPage() {
                             </div>
 
                         </div>
-                    </di>
+                    </div>
 
 
                     {/* transcription conponent */}
@@ -184,13 +217,16 @@ function DiagnosisPage() {
                                 <SpeechButton onTranscript={handleTranscriptPatient}></SpeechButton>
                                 <div>Patient</div>
                             </div>
+                            <button onClick={() => {
+                                console.log(editorRef.current.getRawContent());
+                            }}>tEST</button>
                         </div>
                     </div>
 
                 </div>
 
                 <div className="diagnois-page-right">
-                    <MyEditor showTools={true} ref={editor_2_Ref}></MyEditor>
+                    <MyEditor showTools={true} ref={editorRef} addEditorSection={addEditorSection}></MyEditor>
                 </div>
 
             </div>
