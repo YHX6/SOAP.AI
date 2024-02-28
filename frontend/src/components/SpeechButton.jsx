@@ -15,7 +15,7 @@ if (SpeechRecognition) {
   recognition.interimResults = false;
 }
 
-const SpeechButton = ({ onTranscript }) => {
+const SpeechButton = ({ onTranscript, avatar }) => {
   const [isListening, setIsListening] = useState(false);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const SpeechButton = ({ onTranscript }) => {
   return (
       <button className='voice-btn' onClick={toggleListen}>
         {isListening ? 
-            <img src={recordingVoiceIcon} alt="click button for audio input"></img> : <img src={recordVoiceIcon} alt="click button for audio input"></img>
+            <img src={recordingVoiceIcon} alt="click button for audio input"></img> : <img src={avatar} alt="button to click"></img>
         }
         </button>
   );

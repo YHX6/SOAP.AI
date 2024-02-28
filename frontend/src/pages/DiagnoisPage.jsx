@@ -29,7 +29,7 @@ const defaultKeywordList = [
     // {word:"Asd", tag:"testtag", time:"Amy"},
 ]
 
-
+const avatarList = {male:[m1, m2, m3], female:[f1,f2,f3], other:[o1, o2, o3]};
 function formatTime(date) {
     const month = String(date.getMonth() + 1).padStart(2, '0'); // 月份是从0开始的，所以+1
     const day = String(date.getDate()).padStart(2, '0');
@@ -45,7 +45,8 @@ function DiagnosisPage() {
     const therapists = useSelector((state) => state.document.therapist);
     const members = useSelector((state) => state.document.members);
     const dispatch = useDispatch();
-    const [avatarList, setAvatarList] = useState({});
+    // const [avatarList, setAvatarList] = useState();
+    const [buttonGroups, setButtonGroups] = useState([]);
 
 
     const [messages, setMessages] = useState([]);
@@ -55,8 +56,41 @@ function DiagnosisPage() {
     const [inputWord, setInputWord] = useState("");
     const [inputTag, setInputTag] = useState("");
 
+
     useEffect(() => {
-        
+        let newButtonGroups = [];  // name, role, avatar
+        let mCount = 0;
+        let fCount = 0;
+        let oCount = 0;
+        for(let i=0; i<therapists.length; i++){
+            if(therapists[i].sex === "male" && mCount < 3){
+                newButtonGroups.push({role:therapists[i].role, name:therapists[i].name, avatar:avatarList.male[mCount]});
+                mCount ++;
+            }else if(therapists[i].sex === "female" && fCount < 3){
+                newButtonGroups.push({role:therapists[i].role, name:therapists[i].name, avatar:avatarList.female[fCount]});
+                fCount ++;
+            }else if(therapists[i].sex === "other" && oCount < 3){
+                newButtonGroups.push({role:therapists[i].role, name:therapists[i].name, avatar:avatarList.other[oCount]});
+                oCount ++;
+            }else{
+                newButtonGroups.push({role:therapists[i].role, name:therapists[i].name, avatar:df});
+            }
+        }
+        for(let i=0; i<members.length; i++){
+            if(members[i].sex === "male" && mCount < 3){
+                newButtonGroups.push({role:members[i].role, name:members[i].name, avatar:avatarList.male[mCount]});
+                mCount ++;
+            }else if(therapists[i].sex === "female" && fCount < 3){
+                newButtonGroups.push({role:members[i].role, name:members[i].name, avatar:avatarList.female[fCount]});
+                fCount ++;
+            }else if(therapists[i].sex === "other" && oCount < 3){
+                newButtonGroups.push({role:members[i].role, name:members[i].name, avatar:avatarList.other[oCount]});
+                oCount ++;
+            }else{
+                newButtonGroups.push({role:members[i].role, name:members[i].name, avatar:df});
+            }
+        }
+        setButtonGroups(newButtonGroups);
     }, [])
 
 
@@ -92,15 +126,8 @@ function DiagnosisPage() {
         }
         setMessages([...messages, inputContent]);
     };
-    // const handleTranscriptPatient = (text) => {
-    //     let inputContent = {
-    //         "role": "patient",
-    //         "time": formatTime(new Date()),
-    //         "conv": text
-    //     }
-    //     setMessages([...messages, inputContent]);
-    //     console.log(messages);
-    // };
+
+
 
     const addEditorSection = (selectedOption, customizedOption, AIprompt) => {
         if(selectedOption === "Basic Information"){
@@ -342,10 +369,15 @@ function DiagnosisPage() {
                         </div>
 
                         <div className="audio-btns">
-                            <div className="audio-btn-box">
-                                <SpeechButton onTranscript={handleTranscript}></SpeechButton>
-                                <div>Therapist</div>
-                            </div>
+                            {buttonGroups.map((item, i) => {
+                                return (
+                                    <div className="audio-btn-box" key={i}>
+                                        <SpeechButton onTranscript={(text) => handleTranscript(item.role, item.name, text)} avatar= {item.avatar}></SpeechButton>
+                                        <div>{item.role}</div>
+                                        <div>{item.name}</div>
+                                    </div>
+                                );
+                            })}
 
                         </div>
                     </div>

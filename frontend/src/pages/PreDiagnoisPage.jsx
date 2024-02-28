@@ -110,8 +110,8 @@ function PreDiagnoisPage(props) {
                                                 <span>{item.role}</span>
                                                 <span>{item.name}</span>
                                                 <span>{item.age}</span>
-                                                <span>{item.hostory}</span>
                                                 <span>{item.sex}</span>
+                                                <span>{item.history}</span>
                                                 <span className="role-table-operation" onClick={() => removeKeyword(item.name)}>Delete</span>
                                             </div>
                                         )
