@@ -10,7 +10,7 @@ def get_current_time():
 def parse_to_json(resp):
     return json.loads(resp)
                 
-def parse_ask_character_to_json(resp):
+def parse_to_json_2(resp):
     try:
         return json.loads(resp)
     except Exception as e:  # incase it the dict keys is wrapped by ' instead of "
