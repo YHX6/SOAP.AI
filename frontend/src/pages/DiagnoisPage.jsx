@@ -5,7 +5,7 @@ import { useEffect,useRef, useState } from "react";
 import axios from "axios";
 import { documentToolRouter } from "../config/routeConfig";
 import { getCurrentTimeFormatted } from "../utils/util";
-import { wrapBasicInformation, wrapObject, wrapSubject } from "../utils/editorWraper";
+import { wrapBasicInformation} from "../utils/editorWraper";
 import { useDispatch, useSelector } from "react-redux";
 
 
@@ -132,7 +132,7 @@ function DiagnosisPage() {
     const addEditorSection = (selectedOption, customizedOption, AIprompt) => {
         if(selectedOption === "Basic Information"){
             if(editorRef.current){
-                editorRef.current.setRawContent(wrapBasicInformation());
+                editorRef.current.setRawContent(wrapBasicInformation(sessionInfo, members, therapists));
             }
         }else if (selectedOption === "S (Subject)"){
             axios.post(documentToolRouter, {

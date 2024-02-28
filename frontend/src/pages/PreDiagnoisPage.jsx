@@ -40,7 +40,7 @@ function PreDiagnoisPage(props) {
     const [inputRole, setInputRole] = useState("");
     const [inputName, setInputName] = useState("");
     const [inputAge, setInputAge] = useState("");
-    const [inputSex, setInputSex] = useState("male");
+    const [inputSex, setInputSex] = useState("");
     const [inputHistory, setInputHistory] = useState("");
     const [inputDate, setInputDate] = useState("");
     const [inputTime, setInputTime] = useState("");
@@ -60,8 +60,8 @@ function PreDiagnoisPage(props) {
         setUserRoles([...userRoles, {role:role, name:name, age:age, sex:sex, history: history}]);
         setInputName("");
         setInputAge("");
-        setInputRole("patient");
-        setInputSex("male");
+        setInputRole("");
+        setInputSex("");
         setInputHistory("");
     }
 
@@ -146,6 +146,7 @@ function PreDiagnoisPage(props) {
                                             <div className='roles-table-session'>
                                                 <span>role:</span>
                                                 <select value={inputRole} onChange={(e) => setInputRole(e.target.value)}>
+                                                    <option value="">-</option>
                                                     <option value="patient">patient</option>
                                                     <option value="therapist">therapist</option>
                                                 </select>
@@ -153,6 +154,7 @@ function PreDiagnoisPage(props) {
                                             <div className='roles-table-session'>
                                                 <span>gender:</span>
                                                 <select value={inputSex} onChange={(e) => setInputSex(e.target.value)}>
+                                                    <option value="">-</option>
                                                     <option value="male">male</option>
                                                     <option value="female">female</option>
                                                     <option value="others">others</option>
