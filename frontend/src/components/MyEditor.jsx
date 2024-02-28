@@ -16,16 +16,12 @@ import iconAI from "../assets/icons/ai.svg";
 // you might need to adjust the path to css file
 import "../assets/css/draft-editor.css";
 
-// tailwind css
-import { Select, Option } from "@material-tailwind/react";
-
 
 const MyEditor = forwardRef((props, ref)  =>{
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [cursorStyle, setCursorStyle] = useState([]);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [currentColor, setCurrentColor] = useState('black');
-  const [lastColor, setLastColor] = useState("N/A");
   const [showModal, setShowModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState("")
   const [customizedOption, setCustomizedOption] = useState("");
@@ -37,7 +33,14 @@ const MyEditor = forwardRef((props, ref)  =>{
     }else if(props.textContent){
         setContentFromText(props.textContent);
     }
-    
+
+
+    // for report
+    if(props.reportData){
+      for(let title in props.reportData){
+        insertMultipleTexts(props.reportData[title], title)
+      }
+    }
   }, [])
 
 

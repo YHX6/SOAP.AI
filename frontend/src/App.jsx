@@ -9,6 +9,7 @@ import Welcome from './pages/Welcome';
 import Header from './pages/Header';
 import DiagnosisPage from './pages/DiagnoisPage';
 import PreDiagnosisPage from './pages/PreDiagnoisPage';
+import DisplayPage from './pages/DisplayPage';
 
 
 
@@ -33,6 +34,7 @@ function App() {
               <Route path="/" element={<Welcome></Welcome>}></Route>
               <Route path="/prediagnois" element={<><Header showHeader={showHeader} toggleShowHeader={toggleShowHeader}></Header><PreDiagnosisPage></PreDiagnosisPage></>}></Route>
               <Route path="/diagnois" element={<><Header showHeader={showHeader} toggleShowHeader={toggleShowHeader}></Header><DiagnosisPage></DiagnosisPage></>}></Route>
+              <Route path="/individual-report" element={<><Header showHeader={showHeader} toggleShowHeader={toggleShowHeader}></Header><DisplayPage></DisplayPage></>}></Route>
             </Routes>
           
           </BrowserRouter>

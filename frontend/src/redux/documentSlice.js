@@ -7,6 +7,7 @@ export const documentSlice = createSlice({
     sessionInfo:{},
     therapist: [],
     members: [],
+    documentData: {},
   },
   reducers: {
     initData: (state, action) => {
@@ -16,11 +17,13 @@ export const documentSlice = createSlice({
       state.sessionInfo.location = action.payload.location;
       state.therapist = action.payload.therapist;
       state.members = action.payload.members;
+      state.documentData = action.payload.documentData;
     },
-    setPatientData: (state, action) => {
+    addPatientData: (state, action) => {
+      let person = action.payload.person;
       let key = action.payload.key;
       let value = action.payload.value;
-      state.members.documentData[key] = value;
+      state.documentData[person][key] = value;
     }
   },
 });

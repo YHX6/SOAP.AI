@@ -26,9 +26,6 @@ function Home(props) {
                                 Diagnosis
                             </div>
 
-                            <div className='home-bottom-block' onClick={startPreDiagnosis}>
-                                Treatment Plan
-                            </div>
                         </div>
                     </div>
 

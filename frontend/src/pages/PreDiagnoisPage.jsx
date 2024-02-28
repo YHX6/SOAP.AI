@@ -14,10 +14,11 @@ function PreDiagnoisPage(props) {
         // store data into redux
         let therapists = [];
         let members = [];
+        // let documentData = {}
         for(let i=0; i<userRoles.length; i++){
             if(userRoles[i].role === "patient"){
-                userRoles[i].documentData = {};
                 members.push(userRoles[i]);
+                // documentData[userRoles[i].name] = {}
             }else{
                 therapists.push(userRoles[i]);
             }
@@ -29,6 +30,7 @@ function PreDiagnoisPage(props) {
             location: inputLoc,
             therapist: therapists,
             members: members,
+            // documentData:documentData,
         }));
 
         //next page
