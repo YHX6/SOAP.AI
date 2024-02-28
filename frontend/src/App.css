@@ -1,11 +1,11 @@
 :root{
   /* colors */
-  --color-bg: #fffad0;
-  --color-bar: #fff9a4;
-  --color-bar-dark: #fffc5d;
+  --color-bg: #e7f5ff;
+  --color-bar: #d0ebff;
+  --color-bar-dark: #4dabf7;
   --color-text: #000;
-  --color-dec: #10cfff;
-  --color-dec2: #E1EDE9;
+  --color-dec: #1971c2;
+  --color-dec2: #e3fafc;
 
   /* fonts */
   --font-size-h1: 3rem;

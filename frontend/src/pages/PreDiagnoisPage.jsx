@@ -1,18 +1,43 @@
 import React from 'react';
 import "../assets/css/prediag.css";
 import { useNavigate } from 'react-router-dom';
-import { useEffect,useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { documentActions } from '../redux/documentSlice';
+
 
 function PreDiagnoisPage(props) {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+
     const startDiagnosis = () => {
-        // package json data to the next page
-        // let preDiagData = {}
-        navigate("/diagnois")
+        // store data into redux
+        let therapists = [];
+        let members = [];
+        for(let i=0; i<userRoles.length; i++){
+            if(userRoles[i].role === "patient"){
+                userRoles[i].documentData = {};
+                members.push(userRoles[i]);
+            }else{
+                therapists.push(userRoles[i]);
+            }
+        }
+        dispatch(documentActions.initData({
+            identifier:inputGroupName,
+            dateOfSession: inputDate,
+            timeOfSession: inputTime,
+            location: inputLoc,
+            therapist: therapists,
+            members: members,
+        }));
+
+        //next page
+        navigate("/diagnois");
     }
+
     // role part
     const [userRoles, setUserRoles] = useState([]);
-    const [inputRole, setInputRole] = useState("patient");
+    const [inputRole, setInputRole] = useState("");
     const [inputName, setInputName] = useState("");
     const [inputAge, setInputAge] = useState("");
     const [inputSex, setInputSex] = useState("male");
@@ -49,33 +74,33 @@ function PreDiagnoisPage(props) {
       }
 
     return (
-        <div className='main'>
             <div className='prediag'>
                 <div className='prediag-container'>
                     <div className='prediag-block1'>
                         <div className='prediag-title font-c2'>Pre-Session</div>
                         <div className='prediag-insert-time prediag-session header-font'>
-                            <div class="prediag-subsession header-font">
-                                <div><label for="date-of-session">Date of Session</label></div>
+                            <div className="prediag-subsession header-font">
+                                <div><label>Date of Session</label></div>
                                 <input className='prediag-text' value={inputDate} onChange={(e) => setInputDate(e.target.value)} type="text" id="date-of-session" placeholder="The specific date the session was held."/>
                             </div>
-                            <div class="prediag-subsession header-font">
-                                <div><label for="time-of-session">Time of Session</label></div>
+                            <div className="prediag-subsession header-font">
+                                <div><label>Time of Session</label></div>
                                 <input className='prediag-text' type="text" value={inputTime} onChange={(e) => setInputTime(e.target.value)} id="time-of-session" placeholder="Start and end times."/>
                             </div>
                         </div>
               
                         
-                        <div class="prediag-session header-font">
-                            <div><label for="location">Location</label></div>
+                        <div className="prediag-session header-font">
+                            <div><label>Location</label></div>
                             <input className='prediag-text' type="text" id="location" value={inputLoc} onChange={(e) => setInputLoc(e.target.value)} placeholder="Where the session took place, if relevant."/>
                         </div>
-                        <div class="prediag-session header-font">
-                            <div><label for="group-name">Group Name/Identifier</label></div>
+
+                        <div className="prediag-session header-font">
+                            <div><label>Group Name/Identifier</label></div>
                             <input className='prediag-text' type="text" id="group-name" value={inputGroupName} onChange={(e) => setInputGroupName(e.target.value)} placeholder="If the group has a specific name or identification number."/>
                         </div>
                         <div className='prediag-rolebox-session'>
-                            <div className='header-font'><label for="group-name">Participants</label></div>
+                            <div className='header-font'><label>Participants</label></div>
 
                             <div className="roles-container">
                                 <div className="roles-table-header">
@@ -98,7 +123,7 @@ function PreDiagnoisPage(props) {
                                                 <span>{item.age}</span>
                                                 <span>{item.sex}</span>
                                                 <span className='table-history'>{showHistory(item.history)}</span>
-                                                
+                                           
                                                 <div><span className="role-table-operation" onClick={() => removeKeyword(item.name)}>Delete</span></div>
                                             </div>
                                            
@@ -108,6 +133,30 @@ function PreDiagnoisPage(props) {
                                 </div>
                                 
                                 <div className="roles-table-input">
+
+//                                     <select value={inputRole} onChange={(e) => setInputRole(e.target.value)}>
+//                                         <option value="">--Select--</option>
+//                                         <option value="patient">patient</option>
+//                                         <option value="therapist">therapist</option>
+//                                     </select>
+//                                     <input type="text" value={inputName} onChange={(e) => setInputName(e.target.value)}></input>
+//                                     <input type="text" value={inputAge} onChange={(e) => setInputAge(e.target.value)}></input>
+//                                     <select value={inputSex} onChange={(e) => setInputSex(e.target.value)}>
+//                                         <option value="">Gender</option>
+//                                         <option value="male">Male</option>
+//                                         <option value="female">Female</option>
+//                                         <option value="other">Other</option>
+//                                     </select>
+//                                     {inputRole === "patient" ? 
+//                                         <div className='input-hostory'>
+//                                             <span>Medical History</span>
+//                                             <textarea className='roles-table-textarea' value={inputHistory} onChange={(e) => setInputHistory(e.target.value)}>
+
+//                                             </textarea>
+//                                         </div>
+//                                         :
+//                                         <div className='input-hostory'></div>}
+
                                     <div>
                                         <div className='roles-table-input-top'>
                                             <div className='roles-table-session'>
@@ -145,6 +194,8 @@ function PreDiagnoisPage(props) {
                                     
                                     <button className="table-operation" onClick={addRole}>Add Role</button>
                                 </div>
+  
+
                             </div>
                         </div>
                         <div className='prediag-2'>
@@ -153,7 +204,6 @@ function PreDiagnoisPage(props) {
                     </div>
                 </div>
             </div>
-        </div>
     );
 }
 
