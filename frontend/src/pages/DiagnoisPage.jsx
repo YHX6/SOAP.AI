@@ -357,7 +357,7 @@ function DiagnosisPage() {
 
                     {/* transcription conponent */}
                     <div className="diagnois-page-left-bottom">
-                        <div className="diagnois-page-title font-c2">TRANSCRIPT</div>
+                        <div className="diagnois-page-title font-c2">Transcript</div>
                         {/* conversations */}
                         <div ref={scrollRef} className="diagnois-page-conversations">
                             {messages.map((message, index) => (

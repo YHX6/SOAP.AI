@@ -133,30 +133,6 @@ function PreDiagnoisPage(props) {
                                 </div>
                                 
                                 <div className="roles-table-input">
-
-//                                     <select value={inputRole} onChange={(e) => setInputRole(e.target.value)}>
-//                                         <option value="">--Select--</option>
-//                                         <option value="patient">patient</option>
-//                                         <option value="therapist">therapist</option>
-//                                     </select>
-//                                     <input type="text" value={inputName} onChange={(e) => setInputName(e.target.value)}></input>
-//                                     <input type="text" value={inputAge} onChange={(e) => setInputAge(e.target.value)}></input>
-//                                     <select value={inputSex} onChange={(e) => setInputSex(e.target.value)}>
-//                                         <option value="">Gender</option>
-//                                         <option value="male">Male</option>
-//                                         <option value="female">Female</option>
-//                                         <option value="other">Other</option>
-//                                     </select>
-//                                     {inputRole === "patient" ? 
-//                                         <div className='input-hostory'>
-//                                             <span>Medical History</span>
-//                                             <textarea className='roles-table-textarea' value={inputHistory} onChange={(e) => setInputHistory(e.target.value)}>
-
-//                                             </textarea>
-//                                         </div>
-//                                         :
-//                                         <div className='input-hostory'></div>}
-
                                     <div>
                                         <div className='roles-table-input-top'>
                                             <div className='roles-table-session'>
