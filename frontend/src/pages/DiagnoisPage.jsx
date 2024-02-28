@@ -54,16 +54,17 @@ function DiagnosisPage() {
     const [inputWord, setInputWord] = useState("");
     const [inputTag, setInputTag] = useState("");
 
+
+    const documentData = useSelector((state) => state.document.documentData);
     const nextPage = () => {
+        console.log(documentData);
         navigate("/individual-report");
     }
 
 
-    useEffect(() => {
-        console.log(sessionInfo)
-        console.log(members)
-        console.log(therapists)
 
+
+    useEffect(() => {
         let newButtonGroups = [];  // name, role, avatar
         let mCount = 0;
         let fCount = 0;
@@ -135,25 +136,41 @@ function DiagnosisPage() {
 
 
 
+    const storeDocumentData = (data, title) => {
+        for(let i=0; i<data[title].length; i++){
+            console.log(data[title][i]);
+            console.log(data[title][i]["Patient Name"] in documentData)
+            if(data[title][i]["Patient Name"] in documentData){
+                dispatch(documentActions.addPatientData({
+                    person:data[title][i]["Patient Name"], 
+                    key:title,
+                    value: data[title][i]
+                }))
+            }
+        }
+    }
+
     const addEditorSection = (selectedOption, customizedOption, AIprompt) => {
+
+
         if(selectedOption === "Basic Information"){
             if(editorRef.current){
-                // console.log(members[0])
-                // console.log(members[0].name)
+                console.log(members[0])
+                console.log(members[0].name)
 
-                // for(let i=0; i<members.length; i++){
-                //     dispatch(documentActions.addPatientData({
-                //         person:members[i].name,
-                //         key:"Individual Report",
-                //         value: {
-                //             "Name":members[i].name, 
-                //             "Group Identifier":sessionInfo.identifier,
-                //             "Date of Session":sessionInfo.dateOfSession,
-                //             "Time of Session":sessionInfo.timeOfSession,
-                //             "Location":sessionInfo.location,
-                //         }
-                //     }))
-                // }
+                for(let i=0; i<members.length; i++){
+                    dispatch(documentActions.addPatientData({
+                        person:members[i]["name"],
+                        key:"Individual Report",
+                        value: {
+                            "Name":members[i]["name"], 
+                            "Group Identifier":sessionInfo.identifier,
+                            "Date of Session":sessionInfo.dateOfSession,
+                            "Time of Session":sessionInfo.timeOfSession,
+                            "Location":sessionInfo.location,
+                        }
+                    }))
+                }
                 editorRef.current.setRawContent(wrapBasicInformation(sessionInfo, members, therapists));
             }
         }else if (selectedOption === "S (Subject)"){
@@ -166,6 +183,7 @@ function DiagnosisPage() {
                 // receive the response and add it to right editor
                 if(editorRef.current){
 
+                    storeDocumentData(resp.data.data, resp.data.title);
                     console.log(resp.data)
                     editorRef.current.insertMultipleTexts(resp.data.data, resp.data.title);
     
@@ -182,7 +200,7 @@ function DiagnosisPage() {
             .then((resp) => {
                 // receive the response and add it to right editor
                 if(editorRef.current){
-
+                    storeDocumentData(resp.data.data, resp.data.title);
                     console.log(resp.data)
                     editorRef.current.insertMultipleTexts(resp.data.data, resp.data.title);
     
@@ -201,7 +219,7 @@ function DiagnosisPage() {
             .then((resp) => {
                 // receive the response and add it to right editor
                 if(editorRef.current){
-
+                    storeDocumentData(resp.data.data, resp.data.title);
                     console.log(resp.data)
                     editorRef.current.insertMultipleTexts(resp.data.data, resp.data.title);
     
@@ -219,7 +237,7 @@ function DiagnosisPage() {
             .then((resp) => {
                 // receive the response and add it to right editor
                 if(editorRef.current){
-
+                    storeDocumentData(resp.data.data, resp.data.title);
                     console.log(resp.data)
                     editorRef.current.insertMultipleTexts(resp.data.data, resp.data.title);
     
@@ -238,7 +256,7 @@ function DiagnosisPage() {
             .then((resp) => {
                 // receive the response and add it to right editor
                 if(editorRef.current){
-
+                    storeDocumentData(resp.data.data, resp.data.title);
                     console.log(resp.data)
                     editorRef.current.insertMultipleTexts(resp.data.data, resp.data.title);
     

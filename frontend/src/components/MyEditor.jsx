@@ -37,11 +37,61 @@ const MyEditor = forwardRef((props, ref)  =>{
 
     // for report
     if(props.reportData){
-      for(let title in props.reportData){
-        insertMultipleTexts(props.reportData[title], title)
-      }
+      console.log("--------")
+      console.log(props.reportData)
+
+      individualReport(props.reportData)
     }
   }, [])
+
+////////////// for idividual report //////////////
+const individualReport = (reportData) => {
+  let newState = editorState;
+
+  console.log("report data")
+  console.log(reportData)
+  for(let title in reportData){
+    console.log(title)
+    console.log(reportData)
+    let data = reportData
+    // newState = individualReport(props.reportData, title)
+        newState = insertLineText(newState, title, "unstyled", "BOLD", "fontSizeH2", "");
+      newState = insertLineText(newState, "", "unstyled", "", "fontSizeH2", "")  // insert empty line
+
+
+      console.log(typeof data[title])
+      if(data[title] instanceof Array){
+        // if array of object
+        for(let i=0; i<data[title].length; i++){
+          for(let key in data[title][i]){
+            newState = insertLineText(newState, key, "unstyled", "BOLD", "", "");
+            newState = insertLineText(newState, data[title][i][key], "unstyled", "", "", "")
+          }
+          newState = insertLineText(newState, "", "unstyled", "", "", "")  // insert empty line
+        }
+
+      }else if(data[title] instanceof Object){
+
+        // an object
+        for(let key in data[title]){
+          newState = insertLineText(newState, key, "unstyled", "BOLD", "", "");
+          newState = insertLineText(newState, data[title][key], "unstyled", "", "", "")
+        }
+      }else{
+        newState = insertLineText(newState, data[title], "unstyled", "", "", "")
+      }
+
+      newState = insertLineText(newState, "", "unstyled", "", "", "") // empty line
+
+  }
+  
+
+  setEditorState(newState); // Finally, update the state with the latest newState
+};
+
+
+
+
 
 
 
@@ -543,7 +593,7 @@ const insertMultipleTexts = (data, title) => {
   // console.log(data);
   // console.log(title)
   // console.log(data[title][0]);
-  // console.log(typeof data[title])
+  console.log(typeof data[title])
   if(data[title] instanceof Array){
     // if array of object
     for(let i=0; i<data[title].length; i++){
