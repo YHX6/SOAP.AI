@@ -47,17 +47,18 @@ function DiagnosisPage() {
 
     const editor_1_Ref = useRef();
     const editor_2_Ref = useRef();
-    const [messages, setMessages] = useState([
-        {role: 'therapist', time: '02-26 18:46:28', conv: 'hello'}, 
-{role: 'patient', time: '02-26 18:46:31', conv: 'hello'},
-{role: 'therapist', time: '02-26 18:46:34', conv: 'hi there'},
-{role: 'patient', time: '02-26 18:46:38', conv: 'oh hi'},
-{role: 'therapist', time: '02-26 18:46:41', conv: 'nice to meet you too'},
-{role: 'patient', time: '02-26 18:46:45', conv: 'nice to meet you too'},
-{role: 'therapist', time: '02-26 18:46:47', conv: "what's your name"},
-{role: 'patient', time: '02-26 18:46:51', conv: 'my name is Bob'},
-{role: 'therapist', time: '02-26 18:46:55', conv: 'hi Bob how are you'}
-    ]);
+    const [messages, setMessages] = useState([]);
+//     const [messages, setMessages] = useState([
+//         {role: 'therapist', time: '02-26 18:46:28', conv: 'hello'}, 
+// {role: 'patient', time: '02-26 18:46:31', conv: 'hello'},
+// {role: 'therapist', time: '02-26 18:46:34', conv: 'hi there'},
+// {role: 'patient', time: '02-26 18:46:38', conv: 'oh hi'},
+// {role: 'therapist', time: '02-26 18:46:41', conv: 'nice to meet you too'},
+// {role: 'patient', time: '02-26 18:46:45', conv: 'nice to meet you too'},
+// {role: 'therapist', time: '02-26 18:46:47', conv: "what's your name"},
+// {role: 'patient', time: '02-26 18:46:51', conv: 'my name is Bob'},
+// {role: 'therapist', time: '02-26 18:46:55', conv: 'hi Bob how are you'}
+//     ]);
     const scrollRef = useRef(null);
 
     useEffect(() => {
@@ -163,7 +164,7 @@ function DiagnosisPage() {
 
                     {/* transcription conponent */}
                     <div className="diagnois-page-left-bottom">
-                        <div className="diagnois-page-title">TRANSCRIPT</div>
+                        <div className="diagnois-page-title font-c2">TRANSCRIPT</div>
                         {/* conversations */}
                         <div ref={scrollRef} className="diagnois-page-conversations">
                             {messages.map((message, index) => (

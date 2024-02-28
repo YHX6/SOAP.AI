@@ -1,0 +1,250 @@
+.prediag{
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+.prediag-top{
+    width: 95%;
+    height: 350px;
+    margin: 0 auto;
+
+    border-radius: 0 0 15px 15px;
+}
+
+.prediag{
+    /* height: 70%; */
+    width: 95%;
+    margin: 0 auto;
+    /* display: flex;
+    flex-direction: column;
+    gap: 20px; */
+
+    margin-top: 20px;
+}
+
+.header-font {
+    font-weight: 600;
+}
+
+
+.prediag-container{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.prediag-block1{
+    background-color: white;
+    width: 960px;
+    height: 800px;
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.prediag-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.prediag-block2{
+    background-color: white;
+    width: 450px;
+    height: 600px;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.prediag-block:hover{
+    cursor: pointer;
+}
+
+.prediag-2 {
+    display: flex;
+    justify-content: center;
+}
+
+.prediag-start-btn {
+    width: 90%;
+    height: 50px;
+    color: white;
+    background-color: black;
+    border-radius: 20px;
+}
+
+.prediag-text{
+    display: block;
+    height: 1rem;
+    padding: 15px 10px;
+    border-radius: 12px;
+    border: 1px solid #888;
+    width: 300px;
+    outline: none;
+}
+
+.prediag-insert-time {
+    display: flex;
+    gap: 50px;
+}
+
+.prediag-session {
+    height: 50px;
+    margin: 20px;
+}
+
+.prediag-subsession {
+    height: 50px;
+    width: 50%;
+}
+
+
+.prediag-session input {
+    margin-top: 5px;
+    width: 100%;
+}
+
+.prediag-rolebox-session {
+    margin-top: 20px;
+}
+
+
+/* patient form */
+.patient-form-container {
+    width: 80%;
+    margin: auto;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.prediag-2 {
+    margin-top: 50px;
+}
+
+/************************* roles  ********************/
+.prediagnois-page-top{
+    width: 100%;
+    height: 30%;
+
+    display: flex;
+    flex-direction: column;
+
+}
+.roles-container{
+    margin-top: 10px;
+    background-color: #fff;
+    padding: 10px 10px;
+    min-height: 200px;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+    border-radius: 12px;
+}
+
+.roles-table-header{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.roles-table-body{
+    /* height: calc(100% - 63px);
+    flex-grow: 1;
+    overflow: auto; */
+
+    height: 180px;
+    width: 100%;
+    overflow-Y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+}
+
+.roles-table-row{
+    display: flex;
+    flex-direction: row;
+    line-height: 1.5rem;
+    border-bottom: 1px solid #999;
+}
+.roles-table-header .roles-table-row{
+    border-bottom: 2px solid #666;
+}
+
+.roles-table-row span{
+    font-size: 15px;
+    text-align: left;
+    padding: 1px 10px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+
+}
+.roles-table-row span:first-child{
+    width: 15%;
+}
+.roles-table-row span:nth-child(2){
+    width: 15%;
+}
+
+.roles-table-row span:nth-child(3){
+    width: 15%;
+}
+.roles-table-row span:nth-child(4){
+    width: 15%;
+}
+
+.roles-table-input{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.roles-table-input input{
+    display: block;
+    height: 1rem;
+    padding: 15px 10px;
+    border-radius: 12px;
+    border: 1px solid #888;
+    width: 100px;
+    outline: none;
+}
+
+.roles-table-input button {
+    font-size: 15px;
+    color: white;
+    width: 150px;
+    border-radius: 15px;
+    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2);
+    background-color: #BF8B70;
+}
+
+.role-table-operation{
+    border: none;
+    color: white;
+    background-color: rgb(233, 85, 85);
+    border-radius: 15px;
+}
+.role-table-operation:hover{
+    cursor: pointer;
+}
+
+
+/* scroll bar */
+/* .scrobar-1::-webkit-scrollbar {
+    width: 8px;              
+  }
+  
+.scrobar-1::-webkit-scrollbar-track {
+    background: inherit;       
+  }
+  
+.scrobar-1::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.6);    
+    border-radius: 20px;       
+   
+  } */

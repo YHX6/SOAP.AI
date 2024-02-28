@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 function Home(props) {
     const navigate = useNavigate();
-    const startDiagnosis = () => {
-        navigate("/diagnois")
+    const startPreDiagnosis = () => {
+        navigate("/prediagnois")
     }
 
 
@@ -22,11 +22,11 @@ function Home(props) {
                         <div className='home-bottom-title font-c2'>Tools</div>
 
                         <div className='home-bottom-container'>
-                            <div className='home-bottom-block' onClick={startDiagnosis}>
+                            <div className='home-bottom-block' onClick={startPreDiagnosis}>
                                 Diagnosis
                             </div>
 
-                            <div className='home-bottom-block' onClick={startDiagnosis}>
+                            <div className='home-bottom-block' onClick={startPreDiagnosis}>
                                 Treatment Plan
                             </div>
                         </div>
