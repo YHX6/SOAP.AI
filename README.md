@@ -5,9 +5,9 @@ Therapists spend a significant amount of time on documentation, which includes r
 
 An AI-enabled documentation tool has the potential to significantly improve therapy by streamlining record-keeping, enhancing data accuracy, and providing data-driven insights for personalized care.
 
-SOAP.AI use the AI tools to help theprapist to extract basic therapy session information (date, location, participants information) and patient's information (following SOAP structure, Subject, Object, Assessment, Plan) in a therapy, especially a group therapy. After the master report is generated, SOAP.AI will also generate individual reports for each patient automatically. 
+SOAP.AI uses AI tools to help the therapist to extract basic therapy session information (date, location, participants information) and patient information (following SOAP structure, Subject, Object, Assessment, Plan) in a therapy, especially group therapy from audio input. After the master report is generated, SOAP.AI will also generate individual reports for each patient automatically. 
 
-Moreover, we provide therapists are AI-boosted editor tool to customize information extraction by allowing to set prompt and section name for the information needed.
+Moreover, we provide therapists with an AI-boosted editor tool to customize information extraction by allowing them to set prompt and section names for the information needed.
 
 Here is a structure of the document of SOAP.AI
 
